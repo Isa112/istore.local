@@ -39,17 +39,17 @@
                         if ($this->uri->segment(2) == 'categories') {
                             echo "class=\"active\"";
                         }
-                        ?>><a href="/admin/categories">Категории товаров</a></li>
+                        ?>><a href="/admin/categories">Категории</a></li>
                         <li <?php
                         if ($this->uri->segment(2) == 'subcategories') {
                             echo "class=\"active\"";
                         }
-                        ?>><a href="/admin/subcategories">Подкатегории товаров</a></li>
+                        ?>><a href="/admin/subcategories">Подкатегории</a></li>
                         <li <?php
                         if ($this->uri->segment(2) == 'attributes') {
                             echo "class=\"active\"";
                         }
-                        ?>><a href="/admin/attributes">Атрибуты товаров</a></li>
+                        ?>><a href="/admin/attributes">Атрибуты</a></li>
                         <li <?php
                         if ($this->uri->segment(2) == 'toursbuy') {
                             echo "class=\"active\"";

@@ -26,7 +26,24 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6"> 
+        <div class="form-group">
+            <label for="text">Название</label>
+            <input required name='text' value="<?= $entry['text'] ?>" type="text" class="form-control" id="text" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="url">ЧПУ</label>
+            <input name='url' value="<?= $entry['url'] ?>" type="text" class="form-control" id="url" placeholder="">
+        </div>
+        <label for="category">Категория</label>
+        <div class="form-group">
+            <select name="category" class="form-control" id="category">
+                <?foreach($categories as $category):?>
+                    <option <?if($category['id'] == $entry['category_id']):?>selected<?endif;?> value='<?=$category['id']?>'><?=$category['name']?></option>
+                <?endforeach;?>
+            </select>
+        </div>
+
         <div class="checkbox">
             <label>
                 <input name='active' <?php
@@ -42,21 +59,14 @@
             <input name='image' type="file" class="btn-file" id="image">
             <p class="help-block">Выберите главное фото</p>
         </div>
-        <div class="form-group">
-            <label for="text">Название</label>
-            <input required name='name' value="<?= $entry['name'] ?>" type="text" class="form-control" id="name" placeholder="">
-        </div>
-        <div class="form-group">
-            <label for="url">ЧПУ</label>
-            <input name='url' value="<?= $entry['url'] ?>" type="text" class="form-control" id="url" placeholder="">
-        </div>
+        
     </div>
     <div class="col-md-6">
         <button type="button" id="hideMeta" class="btn btn-default">Meta</button>
         <div id="meta">
             <div class="form-group">
-                <label for="title">Meta Title</label>
-                <input name='metatitle' value="<?= $entry['metatitle'] ?>" type="text" class="form-control" id="title" placeholder="">
+                <label for="title">Meta title</label>
+                <input name='title' value="<?= $entry['title'] ?>" type="text" class="form-control" id="title" placeholder="">
             </div>
             <div class="form-group">
                 <label for="desc">Мета description</label>
@@ -71,15 +81,11 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="form-group">
-            <label for="text">Информация о товаре</label>
-            <textarea name="text" id="text" rows="30">
-                <?= $entry['text'] ?>
-            </textarea>
+        <label for="text">Картинки</label>
+        <div class="alert alert-info" role="alert">
+            <div id="upload_image"></div>
         </div>
-        <script>
-            CKEDITOR.replace('text');
-        </script>
+        <div class="images_group"></div>
     </div>
 </div>
 <div class="row" style="margin-top: 10px;">
@@ -92,11 +98,45 @@
 
 <script>
     $(function(){
+        var url = '/admin/' + '<?= $module ?>' + '/images_upload/' + '<?= $entry['id'] ?>';
+        $("#upload_image").imageUpload(url, {
+            uploadButtonText: "Добавить",
+            previewImageSize: 150,
+            onSuccess: function (response) {
+                $.ajax(
+                        {
+                            url: '/admin/<?= $module ?>/get_images/' + '<?= $entry['id'] ?>',
+                            type: 'POST',
+                            data: {
+                            },
+                            error: function () {
+                                console.log('Ошибка');
+                            },
+                            success: function (data) {
+                                $('.images_group').html(data);
+                                image_del_click_subscription('<?= $module ?>');
+                            }
+                        });
+            }
+        });
+        $.ajax({
+            url: '/admin/<?= $module ?>/get_images/' + '<?= $entry['id'] ?>',
+            type: 'POST',
+            data: {
+            },
+            error: function () {
+                console.log('Ошибка');
+            },
+            success: function (data) {
+                $('.images_group').html(data)
+                image_del_click_subscription('<?= $module ?>');
+            }
+        });
         $("#hideMeta").toggle(function(){
             $("#meta").hide();
         },
         function(){
             $("#meta").show();
         });
-    });
+    })
 </script>

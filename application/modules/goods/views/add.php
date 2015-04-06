@@ -101,7 +101,20 @@
                     getAttr(id);
                 }
             });
-        })
+            $("#hideMeta").toggle(function(){
+                $("#meta").hide();
+            },
+            function(){
+                $("#meta").show();
+            });
+
+            $("#hideAttr").toggle(function(){
+                $("#attr").hide();
+            },
+            function(){
+                $("#attr").show();
+            });
+        });
     </script>
      <div class="col-md-6">
         <div class="form-group">
@@ -131,31 +144,35 @@
             <input name='imageBg' type="file" class="btn-file" id="imageBg">
             <p class="help-block">Выберите главное фото</p>
         </div>
-        <div class="form-group">
-            <label for="imageSm">Изображение</label><br/>
-            <input name='imageSm' type="file" class="btn-file" id="imageSm">
-            <p class="help-block">Выберите дополнительное фото</p>
-        </div>
     </div>
     <div class="col-md-6">
+        <button type="button" id="hideAttr" class="btn btn-default">Attributes</button>
         <div id='attr'></div>
-        <div class="form-group">
-            <label for="metatitle">Мета title</label>
-            <input name='metatitle' value="<?= set_value('metatitle')?>" type="text" class="form-control" id="metatitle" placeholder="">
-        </div>
-        <div class="form-group">
-            <label for="desc">Мета description</label>
-            <textarea name='desc' rows="5" class="form-control" id="desc" placeholder=""><?= set_value('desc') ?></textarea>
-        </div>
-        <div class="form-group">
-            <label for="keyw">Мета keywords</label>
-            <textarea name='keyw' rows="3" class="form-control" id="keyw" placeholder=""><?= set_value('keyw') ?></textarea>
+        <button type="button" id="hideMeta" class="btn btn-default">Meta</button>
+        <div id="meta">
+            <div class="form-group">
+                <label for="metatitle" class='hides'>Мета title</label>
+                <input name='metatitle' value="<?= set_value('metatitle')?>" type="text" class="form-control" id="metatitle" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="desc" class='hides'>Мета description</label>
+                <textarea name='desc' rows="5" class="form-control" id="desc" placeholder=""><?= set_value('desc') ?></textarea>
+            </div>
+            <div class="form-group">
+                <label for="keyw" class='hides'>Мета keywords</label>
+                <textarea name='keyw' rows="3" class="form-control" id="keyw" placeholder=""><?= set_value('keyw') ?></textarea>
+            </div>
+            <div class="form-group">
+                <label for="imageSm">Изображение</label><br/>
+                <input name='imageSm' type="file" class="btn-file" id="imageSm">
+                <p class="help-block">Выберите дополнительное фото</p>
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="text">Информация об отеле</label>
+                <label for="text">Информация о товаре</label>
                 <textarea name="text" id="text" rows="30">
                     <?= set_value('text') ?>
                 </textarea>
@@ -172,3 +189,5 @@
         </div>    
     </div>
     <?form_close(); ?>
+
+    

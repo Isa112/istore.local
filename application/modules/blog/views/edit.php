@@ -41,7 +41,14 @@
             <label for="url">ЧПУ</label>
             <input disabled name='url' value="<?= $entry['url'] ?>" type="text" class="form-control" id="url" placeholder="">
         </div>
-
+        <div class="form-group">
+            <select name="category" class="form-control" id="category">
+                <option disabled selected>Выберите подкатегорию</option>
+                <?foreach($categories as $category):?>
+                    <option <?if($category['id'] == $entry['category_id']):?>selected<?endif;?> value='<?=$category['id']?>'><?=$category['name']?></option>
+                <?endforeach;?>
+            </select>
+        </div>
         <div class="form-group">
             <label for="date">Дата публикаци</label>
             <div class='input-group date' id='date'>

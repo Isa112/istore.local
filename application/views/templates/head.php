@@ -30,7 +30,7 @@
                         <?php foreach($categories as $category):?>
                         <?php $subcategories = Modules::run('subcategories/getByCatId',$category['id']);?>
                           <li>
-                              <a class="trigger right-caret"><?=$category['text']?></a>
+                              <a href="/<?= $category['url'] ?>" class="trigger"><?=$category['name']?></a>
                               <?php if(count($subcategories)>0):?>
                                 <ul class="dropdown-menu sub-menu">
                                 <?php foreach($subcategories as $subcategory):?>
@@ -46,7 +46,7 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-delay="100">Аксессуары<b class="caret"></b></a>
                      <ul class="dropdown-menu">
                         <li>
-                           <a class="trigger right-caret">Level 1</a>
+                           <a class="trigger">Level 1</a>
                            <ul class="dropdown-menu sub-menu">
                               <li><a href="#">Level 2</a></li>
                               <li><a href="#">Level 2</a></li>
@@ -54,7 +54,7 @@
                            </ul>
                         </li>
                         <li>
-                           <a class="trigger right-caret">Level 1</a>
+                           <a class="trigger">Level 1</a>
                            <ul class="dropdown-menu sub-menu">
                               <li><a href="#">Level 2</a></li>
                               <li><a href="#">Level 2</a></li>
@@ -62,7 +62,7 @@
                            </ul>
                         </li>
                         <li>
-                           <a class="trigger right-caret">Level 1</a>
+                           <a class="trigger">Level 1</a>
                            <ul class="dropdown-menu sub-menu">
                               <li><a href="#">Level 2</a></li>
                               <li><a href="#">Level 2</a></li>
@@ -71,7 +71,7 @@
                         </li>
                      </ul>
                </li>
-                    <li><a href="#">Статьи</a></li>
+                    <li><a href="/news/">Статьи</a></li>
                     <li><a href="/contacts/">Контакты</a></li>
                     <li>
                       <form action="#" role="search">

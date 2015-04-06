@@ -1,9 +1,27 @@
-<div class="news_and_blog">
-    <div class="wrapper">
-        <h3 class="main_title"><?= $entry['name'] ?></h3>
-        <span><?= date('d.m.Y H:i', strtotime($entry['date'])) ?></span>
-        <div class="clear"></div>
-        <img src="/images/news/<?= $entry['image'] ?>" alt="<?= $entry['name'] ?>">
-        <?= $entry['text'] ?>
-    </div>
-</div>
+<?php if(!empty($entry)):?>
+	<!-- iMac -->
+	<div class="news">
+	   <!-- container -->
+	   <div class="container">
+	      <!-- row -->
+	      <div class="row">
+	
+	         <div class="col-md-12 col-xs-12 news_img">
+	            <img src="/images/news/<?=$entry['image']?>" title="">
+	         </div>
+	
+	      </div><!-- row end -->
+	   </div><!-- container end -->
+	</div><!-- iMac end -->
+	
+	
+	<article class="news">
+	   <div class="container">
+	      <div class="row">
+	         <div class="col-md-12 col-xs-12">
+	            <?=$entry['text']?>
+	         </div>
+	      </div>
+	   </div>
+	</article>
+<?php endif;?>

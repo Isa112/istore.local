@@ -38,8 +38,9 @@
         <label for="category">Категория</label>
         <div class="form-group">
             <select name="category" class="form-control" id="category">
+                <option disabled selected>Выберите подкатегорию</option>
                 <?foreach($categories as $category):?>
-                    <option value='<?=$category['id']?>'><?=$category['text']?></option>
+                    <option value='<?=$category['id']?>'><?=$category['name']?></option>
                 <?endforeach;?>
             </select>
         </div>
@@ -73,7 +74,7 @@
             </div>
         </div>
     </div>
-</div
+</div>
 <div class="row" style="margin-top: 10px;">
     <div class="col-md-12">
         <input type="hidden" name="do" value="<?= $module ?>Add">

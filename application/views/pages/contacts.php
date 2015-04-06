@@ -7,7 +7,7 @@
 
          <div class="col-md-10 col-md-offset-1">
             <h2>Форма обратной связи</h2>
-            <?= Modules::run('feedback/view',true) ?>
+            <?= Modules::run('feedback/save') ?>
          </div>
 
       </div><!-- row end -->

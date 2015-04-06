@@ -40,7 +40,14 @@
             <label for="url">ЧПУ</label>
             <input required name='url' value="<?= set_value('url') ?>" type="text" class="form-control name_translit" id="url" placeholder="">
         </div>
-
+        <div class="form-group">
+            <select name="category" class="form-control" id="category">
+                <option disabled selected>Выберите подкатегорию</option>
+                <?foreach($categories as $category):?>
+                    <option value='<?=$category['id']?>'><?=$category['name']?></option>
+                <?endforeach;?>
+            </select>
+        </div>
         <div class="form-group">
             <label for="date">Дата публикаци</label>
             <div class='input-group date' id='date'>

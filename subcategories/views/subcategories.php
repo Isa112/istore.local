@@ -3,26 +3,10 @@
     <?php if (is_array($entries)) { ?>
         <tr>
             <td width="30px">#</td>
-            <td width="30%">Название</td>
-            <td width="30%">ЧПУ</td>
-            <td width="30%">
-                <!-- <a href="/admin/goods/subcategory_id/asc">Подкатегория</a> -->
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default" onclick="location.href='/admin/goods/';">Подкатегории</button>
-                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <?php if(!empty($subcategories)):?>
-                    <ul class="dropdown-menu" role="menu">
-                      <?php foreach($subcategories as $subcategory):?>
-                        <li><a href="/admin/goods/subcategory/<?=$subcategory['id']?>"><?=$subcategory['text']?></a></li>
-                      <?php endforeach;?>
-                    </ul>
-                  <?php endif;?>
-                </div>
-            </td>
-            <td>Миниатюра</td>
+            <td width="30px">ЧПУ</td>
+            <td width="30px">Текст</td>
+            <td width="30px">Категория</td>
+            <td width="100%">Картинка</td>
             <td>Активен</td>
             <td>Порядок</td>
             <td width="30px">Редактировать</td>
@@ -33,10 +17,11 @@
             ?>
             <tr>
                 <td class="id" width="30px"><?= $entry['id'] ?></td>
-                <td width="30%"><?= $entry['name'] ?></td>
-                <td width="30%"><?= cut_str($entry['url'], 30) ?></td>
-                <td witdth="30%"><?= $entry['subcategory_name']?></td>
-                <td width="20px"><img width="50px" src='/images/<?= $module ?>/<?= $entry['imageSm'] ?>'></td>
+                <td width="30px"><?= cut_str($entry['url'], 50) ?></td>
+                <td><?= mb_strimwidth(strip_tags($entry['text']), 0, 50, "..."); ?></td>
+                <?php if($entry['category_id']!=0) $category = Modules::run('categories/get', $entry['category_id']); else $category['text'] = 'Нет категории';?>
+                <td><?=$category['text']?></td>
+                <td width="20px"><img style="max-width: 150px;" src='/images/<?= $module ?>/<?= $entry['image'] ?>'></td>
                 <td width="30px"><?php
                     if ($entry['active'] == 'on') {
                         echo '<span style="-webkit-user-select: none;" class="label label-success active">да</span>';

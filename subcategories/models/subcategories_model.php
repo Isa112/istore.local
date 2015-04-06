@@ -1,10 +1,10 @@
 <?php
 
-class Blog_model extends CI_Model {
+class Subcategories_model extends CI_Model {
 
-    private $table_name = 'blog';
-    private $images_table = 'tours_images';
-    private $redirect_url = 'blog';
+    private $table_name = 'subcategories';
+//    private $images_table = 'news_images';
+    private $redirect_url = 'subcategories';
 
     public function __construct() {
         $this->load->database();
@@ -36,9 +36,9 @@ class Blog_model extends CI_Model {
                 return $query->row_array();
             }
             $this->db->order_by('order', 'desc');
-            $this->db->order_by('date', 'desc');
             $query = $this->db->get($this->table_name);
             if (count($query->result_array()) > 0) {
+                /*var_dump($query->row_array());die;*/
                 return $query->result_array();
             } else {
                 return false;
@@ -50,7 +50,6 @@ class Blog_model extends CI_Model {
                 return $query->row_array();
             }
             $this->db->order_by('order', 'desc');
-            $this->db->order_by('date', 'desc');
             $query = $this->db->get_where($this->table_name, array('active' => 'on'));
             if (count($query->result_array()) > 0) {
                 return $query->result_array();
@@ -60,16 +59,14 @@ class Blog_model extends CI_Model {
         }
     }
 
-    public function get3posts_for_front() {
-        $this->db->order_by('order', 'desc');
-        $this->db->order_by('date', 'desc');
-        $query = $this->db->get_where($this->table_name, array('active' => 'on'), 3);
-        return $query->result_array();
-    }
-
-    public function get_by_url($url) {
-        $query = $this->db->get_where($this->table_name, array('active' => 'on', 'url' => $url));
-        return $query->row_array();
+    public function get_by_url($url, $for_front = true) {
+        if ($for_front) {
+            $query = $this->db->get_where($this->table_name, array('active' => 'on', 'url' => $url));
+            return $query->row_array();
+        } else {
+            $query = $this->db->get_where($this->table_name, array('url' => $url));
+            return $query->row_array();
+        }
     }
 
     public function get_blogs($id = null) {
@@ -94,23 +91,16 @@ class Blog_model extends CI_Model {
     }
 
     public function set($image) {
-        date_default_timezone_set('Asia/Bishkek');
-        if ($this->input->post('date')) {
-            $date = date('Y-m-d H:i:s', strtotime($this->input->post('date')));
-        } else {
-            $date = date('Y-m-d H:i:s', time());
-        }
+
         $data = array(
-            'name' => $this->input->post('name'),
+            'active' => $this->input->post('active'),
             'url' => $this->input->post('url'),
+            'text' => $this->input->post('text'),
+            'category_id' => $this->input->post('category'),
+            'image' => $image,
             'title' => $this->input->post('title'),
             'desc' => $this->input->post('desc'),
             'keyw' => $this->input->post('keyw'),
-            'text' => $this->input->post('text'),
-            'category_id' => $this->input->post('category'),
-            'date' => $date,
-            'active' => $this->input->post('active'),
-            'image' => $image
         );
 
         $this->db->insert($this->table_name, $data);
@@ -124,33 +114,81 @@ class Blog_model extends CI_Model {
     public function update($id, $image = null) {
         if (!$image) {
             $data = array(
-                'name' => $this->input->post('name'),
+                'active' => $this->input->post('active'),
+                'url' => $this->input->post('url'),
+                'text' => $this->input->post('text'),
+                'category_id' => $this->input->post('category'),
                 'title' => $this->input->post('title'),
                 'desc' => $this->input->post('desc'),
                 'keyw' => $this->input->post('keyw'),
-                'text' => $this->input->post('text'),
-                'category_id' => $this->input->post('category'),
-                'date' => date('Y-m-d H:i:s', strtotime($this->input->post('date'))),
-                'active' => $this->input->post('active')
             );
             $this->db->where('id', $id);
             $this->db->update($this->table_name, $data);
         } else {
             $data = array(
-                'name' => $this->input->post('name'),
+                'active' => $this->input->post('active'),
+                'url' => $this->input->post('url'),
+                'text' => $this->input->post('text'),
+                'category_id' => $this->input->post('category'),
+                'image' => $image,
                 'title' => $this->input->post('title'),
                 'desc' => $this->input->post('desc'),
                 'keyw' => $this->input->post('keyw'),
-                'text' => $this->input->post('text'),
-                'category_id' => $this->input->post('category'),
-                'date' => date('Y-m-d H:i:s', strtotime($this->input->post('date'))),
-                'active' => $this->input->post('active'),
-                'image' => $image
             );
 
             $this->db->where('id', $id);
             $this->db->update($this->table_name, $data);
         }
+    }
+
+    public function getCategoryById($id)
+    {
+        $id = (int)$id;
+        return Modules::run('categories/get',$id);
+    }
+
+    public function getByCatId($id) {
+        if ($id) 
+        {
+            $query = $this->db->get_where($this->table_name, array('category_id' => $id, 'active' => 'on'));
+
+            return $query->result_array();
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function getCatIdByUrl($url) {
+        return Modules::run('categories/get_by_url',$url);
+    }
+
+    public function images_insert($image, $id) {
+        $data = array(
+            'image' => $image,
+            'order' => 0,
+            'subcategory_id' => $id
+        );
+
+        return $this->db->insert($this->images_table, $data);
+    }
+
+    public function get_images($id) {
+        $query = $this->db->get_where($this->images_table, array('subcategory_id' => $id));
+        return $query->result_array();
+    }
+
+    public function delete_images($id) {
+        $this->db->delete($this->images_table, array('subcategory_id' => $id));
+    }
+
+    public function get_image($id) {
+        $query = $this->db->get_where($this->images_table, array($this->primary_key => $id));
+        return $query->row_array();
+    }
+
+    public function delete_image($id) {
+        $this->db->delete($this->images_table, array($this->primary_key => $id));
     }
 
 }

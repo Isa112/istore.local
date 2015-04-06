@@ -1,13 +1,18 @@
-<div class="news_and_blog">
-    <div class="wrapper">
-        <h3 class="main_title">НОВОСТИ</h3>
-        <?php foreach ($entries as $entry): ?>
-            <div class="news_and_blog_item clearfix" style="width:100%">
-                <img src="/images/news/<?= $entry['image'] ?>" alt="<?= $entry['name'] ?>">
-                <h6><?= $entry['name'] ?><span><?= date('d.m.Y H:i', strtotime($entry['date'])) ?></span></h6>
-                <p><?= mb_strimwidth(strip_tags($entry['text']), 0, 300, "..."); ?></p>
-                <a href="/news/<?= $entry['url'] ?>">Перейти &gt;</a>
-            </div>
-        <?php endforeach; ?>
-    </div>
-</div>
+<?php if(!empty($entries)):?>
+    <!-- iMac -->
+    <div class="allnews">
+       <!-- container -->
+       <div class="container">
+          <!-- row -->
+          <div class="row">
+            <?php foreach($entries as $entry):?>
+                <div class="col-md-12 col-xs-12 allnews_img">
+                   <a href="/news/<?=$entry['url']?>"><img src="/images/news/<?= $entry['image'] ?>" title=""></a>
+                   <p><?= mb_strimwidth(strip_tags($entry['text']), 0, 300, "..."); ?><a href="">Подробнее...</a></p>
+                </div>
+            <?php endforeach;?> 
+    
+          </div><!-- row end -->
+       </div><!-- container end -->
+    </div><!-- iMac end -->
+<?php endif;?>

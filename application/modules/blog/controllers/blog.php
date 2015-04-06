@@ -51,6 +51,7 @@ class Blog extends MX_Controller {
         $data['tags'] = $tags;
         $data['module_name'] = $this->module_name;
         $data['module'] = $this->module;
+        $data['categories'] = Modules::run('categories/get');
         if ($this->input->post('do') == 'blogEdit') {
             $this->form_validation->set_rules('name', 'Заголовок', 'required|trim|xss_clean');
             //$this->form_validation->set_rules('url', 'Чпу', 'required|trim|xss_clean');
@@ -150,6 +151,7 @@ class Blog extends MX_Controller {
         $data['title'] = 'Административная панель';
         $data['module_name'] = $this->module_name;
         $data['module'] = $this->module;
+        $data['categories'] = Modules::run('categories/get');
         if ($this->input->post('do') == 'blogAdd') {
             $this->form_validation->set_rules('name', 'Заголовок', 'required|trim|xss_clean');
             $this->form_validation->set_rules('url', 'Чпу', 'required|trim|xss_clean|callback_check_url');

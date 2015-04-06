@@ -42,17 +42,18 @@ class Feedback extends MX_Controller {
             $data['entries'] = $this->model->get();
             $this->load->view($this->module, $data);
         } else {
-            $this->load->view('front/feedback_form',$data);
+            $data['entries'] = $this->model->get('', true);
+            $this->load->view('front/feedback_form', $data);
         }
     }
 
     public function save() {
         $data['module'] = $this->module;
         if ($this->input->post('do') == $this->module . 'Save') {
-            $this->form_validation->set_rules('name', 'Name', 'required|trim|xss_clean');
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email|trim|xss_clean');
-            $this->form_validation->set_rules('theme', 'Theme', 'required|trim|xss_clean');
-            $this->form_validation->set_rules('message', 'Message', 'required|trim|xss_clean');
+            $this->form_validation->set_rules('name', 'name', 'required|trim|xss_clean');
+            $this->form_validation->set_rules('email', 'email', 'required|valid_email|trim|xss_clean');
+            $this->form_validation->set_rules('theme', 'theme', 'required|trim|xss_clean');
+            $this->form_validation->set_rules('message', 'message', 'required|trim|xss_clean');
 
             $this->form_validation->set_error_delimiters('<p style="color:red;">', '</p>');
 
@@ -84,7 +85,7 @@ class Feedback extends MX_Controller {
                             'Имя: ' . $this->input->post('name') . '<br>' .
                             'Телефон: ' . $this->input->post('phone') . '<br>' .
                             'E-mail: ' . $this->input->post('email') . '<br>' .
-                            'Текст: ' . $this->input->post('message') . '<br>' .
+                            'Текст: ' . $this->input->post('text') . '<br>' .
                             'Дата: ' . date('Y-m-d H:i:s') . '<br>' .
                             'IP: ' . $this->input->ip_address() . '<br>'
                     );
@@ -92,7 +93,6 @@ class Feedback extends MX_Controller {
                 }
             }
         } else {
-            echo $this->module;
             $this->load->view('front/feedback_form', $data);
         }
     }

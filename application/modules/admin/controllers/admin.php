@@ -63,14 +63,14 @@ class Admin extends MX_Controller {
         }
     }
 
-    public function view($page = 'main') {
+    public function view($page = 'main',$subcategory_id=null) {
         if ($page != 'login' && !$this->session->userdata('logged')) {
             redirect('admin/login');
         }
 
         $data['title'] = 'Административная панель';
         $data['msgs'] = Modules::run('requests/get_unread_requests');
-
+        $data['subcategory_id'] = $subcategory_id;
         $this->load->view('templates/metahead', $data);
         $this->load->view('templates/navbar', $data);
         $this->load->view('pages/' . $page, $data);

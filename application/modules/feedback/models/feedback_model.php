@@ -67,9 +67,10 @@ class Feedback_model extends CI_Model {
         date_default_timezone_set('Asia/Bishkek');
         $data = array(
             'name' => $this->input->post('name'),
-            'message' => $this->input->post('message'),
+            'text' => $this->input->post('text'),
             'email' => $this->input->post('email'),
             'date' => date('Y-m-d H:i:s'),
+            'phone' => $this->input->post('phone'),
             'ip' => $this->input->ip_address(),
             'read' => 0
         );

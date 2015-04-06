@@ -26,7 +26,7 @@ class Front extends MX_Controller {
             $subCat['category_url'] = $url;
             $data['keyw'] = $cat['keyw'];
             $data['desc'] = $cat['desc'];
-            $data['title'] = $cat['title'];
+            $data['title'] = $cat['metatitle'];
             $data['url'] = $url;
             $data['entry'] = $cat;
             $data['entry']['sub'] = $sub;
@@ -44,44 +44,33 @@ class Front extends MX_Controller {
         $cat = Modules::run('categories/get_by_url', $catUrl);
         if($cat)
         {
-            $subCat = Modules::run('subcategories/get_by_url',$subCatUrl);
-            if($subCat)
+            $goods = Modules::run('goods/getBySubCatUrl',$subCatUrl);
+            if($goods)
             {
-                $images = Modules::run('subcategories/get_images',$subCat['id'],true);
-                /*var_dump($images);die;*/
-                $goods = Modules::run('goods/getBySubCatUrl',$subCatUrl);
-                if($goods)
+                foreach($goods as &$good)
                 {
-                    foreach($goods as &$good)
-                    {
-                        $good['subcategory_name'] = Modules::run('goods/getSubCatNameById',$good['subcategory_id']);
-                    }
-                    $data['title'] = "Товары";
-                    $data['catUrl'] = $catUrl;
-                    $data['subCatUrl'] = $subCatUrl;
-                    $data['entries'] = $goods;
-                    $data['images'] = $images;
-                    $this->load->view('templates/metahead', $data);
-                    $this->load->view('templates/head', $data);
-                    $this->load->view('pages/goods', $data);
-                    $this->load->view('templates/footer', $data);
+                    $good['subcategory_name'] = Modules::run('goods/getSubCatNameById',$good['subcategory_id']);
                 }
-                else
-                {
-                    $data['title'] = "Товары";
-                    $data['catUrl'] = $catUrl;
-                    $data['subCatUrl'] = $subCatUrl;
-                    $data['entries'] = $goods;
-                    $this->load->view('templates/metahead', $data);
-                    $this->load->view('templates/head', $data);
-                    $this->load->view('pages/goods', $data);
-                    $this->load->view('templates/footer', $data);
-                }
+                $data['title'] = "Товары";
+                $data['catUrl'] = $catUrl;
+                $data['subCatUrl'] = $subCatUrl;
+                $data['entries'] = $goods;
+                $this->load->view('templates/metahead', $data);
+                $this->load->view('templates/head', $data);
+                $this->load->view('pages/goods', $data);
+                $this->load->view('templates/footer', $data);
             }
             else
             {
-                show_404();
-            }                                                                                 
+                $data['title'] = "Товары";
+                $data['catUrl'] = $catUrl;
+                $data['subCatUrl'] = $subCatUrl;
+                $data['entries'] = $goods;
+                $this->load->view('templates/metahead', $data);
+                $this->load->view('templates/head', $data);
+                $this->load->view('pages/goods', $data);
+                $this->load->view('templates/footer', $data);
+            }
         }
         else
         {
@@ -230,10 +219,7 @@ class Front extends MX_Controller {
         $data['title'] = 'Блог';
         $this->load->view('templates/metahead', $data);
         $this->load->view('templates/head', $data);
-        $this->load->view('templates/slider', $data);
-        $this->load->view('templates/none_reservation', $data);
         $this->load->view('pages/blog', $data);
-        $this->load->view('templates/contacts', $data);
         $this->load->view('templates/footer', $data);
     }
 
@@ -255,10 +241,7 @@ class Front extends MX_Controller {
         $data['title'] = 'Новости';
         $this->load->view('templates/metahead', $data);
         $this->load->view('templates/head', $data);
-        $this->load->view('templates/slider', $data);
-        $this->load->view('templates/none_reservation', $data);
         $this->load->view('pages/news', $data);
-        $this->load->view('templates/contacts', $data);
         $this->load->view('templates/footer', $data);
     }
 
@@ -269,10 +252,7 @@ class Front extends MX_Controller {
         $data['url'] = $url;
         $this->load->view('templates/metahead', $data);
         $this->load->view('templates/head', $data);
-        $this->load->view('templates/slider', $data);
-        $this->load->view('templates/none_reservation', $data);
         $this->load->view('pages/new', $data);
-        $this->load->view('templates/contacts', $data);
         $this->load->view('templates/footer', $data);
     }
 

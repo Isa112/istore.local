@@ -10,79 +10,6 @@
                </a>
             </div>
          <?php endforeach;?>
-   
-         <!-- <div class="panel-navigation-item clearfix">
-            <a href="#">
-                <img src="http://i20.ltalk.ru/80/11/281180/79/8764379/fantasy_girls_1988.jpeg" alt=""/>
-               <span>Описание или модель продукта</span>
-               <span class="load_more">подробнее</span>
-            </a>
-         </div>
-            
-         <div class="panel-navigation-item clearfix">
-            <a href="#">
-               <img src="http://i20.ltalk.ru/80/11/281180/79/8764379/fantasy_girls_1988.jpeg" alt=""/>
-               <span>Описание или модель продукта</span>
-               <span class="load_more">подробнее</span>
-            </a>
-         </div>
-            
-         <div class="panel-navigation-item clearfix">
-            <a href="#">
-               <img src="http://i20.ltalk.ru/80/11/281180/79/8764379/fantasy_girls_1988.jpeg" alt=""/>
-               <span>Описание или модель продукта</span>
-               <span class="load_more">подробнее</span>
-            </a>
-         </div>
-            
-         <div class="panel-navigation-item clearfix">
-            <a href="#">
-               <img src="http://i20.ltalk.ru/80/11/281180/79/8764379/fantasy_girls_1988.jpeg" alt=""/>
-               <span>Описание или модель продукта</span>
-               <span class="load_more">подробнее</span>
-            </a>
-         </div>
-            
-         <div class="panel-navigation-item clearfix">
-            <a href="#">
-               <img src="http://i20.ltalk.ru/80/11/281180/79/8764379/fantasy_girls_1988.jpeg" alt=""/>
-               <span>Описание или модель продукта</span>
-               <span class="load_more">подробнее</span>
-            </a>
-         </div>
-            
-         <div class="panel-navigation-item clearfix">
-            <a href="#">
-               <img src="http://i20.ltalk.ru/80/11/281180/79/8764379/fantasy_girls_1988.jpeg" alt=""/>
-               <span>Описание или модель продукта</span>
-               <span class="load_more">подробнее</span>
-            </a>
-         </div>
-            
-         <div class="panel-navigation-item clearfix">
-            <a href="#">
-               <img src="http://i20.ltalk.ru/80/11/281180/79/8764379/fantasy_girls_1988.jpeg" alt=""/>
-               <span>Описание или модель продукта</span>
-               <span class="load_more">подробнее</span>
-            </a>
-         </div>
-            
-         <div class="panel-navigation-item clearfix">
-            <a href="#">
-               <img src="http://i20.ltalk.ru/80/11/281180/79/8764379/fantasy_girls_1988.jpeg" alt=""/>
-               <span>Описание или модель продукта</span>
-               <span class="load_more">подробнее</span>
-            </a>
-         </div>
-            
-         <div class="panel-navigation-item clearfix">
-            <a href="#">
-               <img src="http://i20.ltalk.ru/80/11/281180/79/8764379/fantasy_girls_1988.jpeg" alt=""/>
-               <span>Описание или модель продукта</span>
-               <span class="load_more">подробнее</span>
-            </a>
-         </div> -->
-   
        </div>
        <div id="panel-sticker" title="Еще товары">
             <p></p>
@@ -114,7 +41,7 @@
                <?php foreach($images as $key=>$image):?>
                   <div class="item <?php if($key==0):?>active<?php endif;?>">
                      <a href="#"><img src="/images/goods/<?=$image['image']?>" alt="" title=""></a>
-                     <h3><a href="#">Номер 1</a></h3>
+                     <h3><a href="#"><?=$image['name']?></a></h3>
                   </div><!-- item end -->
                <?php endforeach;?>
    

@@ -29,7 +29,7 @@ class Goods_model extends CI_Model {
         redirect('admin/' . $this->redirect_url);
     }
 
-    public function get($id = null, $for_front = false) {
+    public function get($id = null, $for_front = false,$subcategory_id=null) {
         if (!$for_front) {
             if ($id) {
                 $query = $this->db->get_where($this->table_name, array($this->primary_key => $id));
@@ -37,7 +37,10 @@ class Goods_model extends CI_Model {
                 return $query->row_array();
             }
             $this->db->order_by('order', 'desc');
-            $query = $this->db->get($this->table_name);
+            if($subcategory_id)
+                $query = $this->db->get_where($this->table_name,array('subcategory_id'=>$subcategory_id));
+            else
+                $query = $this->db->get($this->table_name);
             if (count($query->result_array()) > 0) {
                 return $query->result_array();
             } else {
@@ -272,6 +275,19 @@ class Goods_model extends CI_Model {
         $query = $this->db->get_where('subcategories',array('url' => $url));
         $subCat = $query->row_array();
         return  $subCat['id'];
+    }
+
+    public function good_data_save() {
+        $good_id = $this->input->post('good_id');
+        $good_name = $this->input->post('good_name');
+        var_dump($_POST);
+        $data = array(
+            'name' => $good_name,
+            'order' => 0
+        );
+
+        $this->db->where('id', $good_id);
+        $this->db->update($this->images_table, $data);
     }
 
 }

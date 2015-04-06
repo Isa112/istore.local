@@ -113,9 +113,10 @@ class Categories_model extends CI_Model {
         if (!$image) {
             $data = array(
                 'active' => $this->input->post('active'),
+                'name' => $this->input->post('name'),
                 'url' => $this->input->post('url'),
                 'text' => $this->input->post('text'),
-                'title' => $this->input->post('title'),
+                'metatitle' => $this->input->post('metatitle'),
                 'desc' => $this->input->post('desc'),
                 'keyw' => $this->input->post('keyw'),
             );
@@ -124,10 +125,11 @@ class Categories_model extends CI_Model {
         } else {
             $data = array(
                 'active' => $this->input->post('active'),
+                'name' => $this->input->post('name'),
                 'url' => $this->input->post('url'),
                 'text' => $this->input->post('text'),
                 'image' => $image,
-                'title' => $this->input->post('title'),
+                'metatitle' => $this->input->post('metatitle'),
                 'desc' => $this->input->post('desc'),
                 'keyw' => $this->input->post('keyw'),
             );

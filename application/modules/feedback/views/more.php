@@ -50,6 +50,14 @@
     </div>
     <div class="col-md-6">
         <div class="panel panel-default">
+            <div class="panel-heading">Телефон</div>
+            <div class="panel-body">
+                <?= $entry['phone'] ?>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
             <div class="panel-heading">E-mail</div>
             <div class="panel-body">
                 <?= $entry['email'] ?>
@@ -60,7 +68,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">Сообщение</div>
             <div class="panel-body">
-                <?= $entry['message'] ?>
+                <?= $entry['text'] ?>
             </div>
         </div>
     </div>

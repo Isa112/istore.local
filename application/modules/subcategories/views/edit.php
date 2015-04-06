@@ -62,19 +62,21 @@
         
     </div>
     <div class="col-md-6">
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input name='title' value="<?= $entry['title'] ?>" type="text" class="form-control" id="title" placeholder="">
+        <button type="button" id="hideMeta" class="btn btn-default">Meta</button>
+        <div id="meta">
+            <div class="form-group">
+                <label for="title">Meta title</label>
+                <input name='title' value="<?= $entry['title'] ?>" type="text" class="form-control" id="title" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="desc">Мета description</label>
+                <textarea name='desc' rows="5" class="form-control" id="desc" placeholder=""><?= $entry['desc'] ?></textarea>
+            </div>
+            <div class="form-group">
+                <label for="keyw">Мета keywords</label>
+                <textarea name='keyw' rows="3" class="form-control" id="keyw" placeholder=""><?= $entry['keyw'] ?></textarea>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="desc">Мета description</label>
-            <textarea name='desc' rows="5" class="form-control" id="desc" placeholder=""><?= $entry['desc'] ?></textarea>
-        </div>
-        <div class="form-group">
-            <label for="keyw">Мета keywords</label>
-            <textarea name='keyw' rows="3" class="form-control" id="keyw" placeholder=""><?= $entry['keyw'] ?></textarea>
-        </div>
-        
     </div>
 </div>
 <div class="row">
@@ -130,5 +132,11 @@
                 image_del_click_subscription('<?= $module ?>');
             }
         });
+        $("#hideMeta").toggle(function(){
+            $("#meta").hide();
+        },
+        function(){
+            $("#meta").show();
+        });
     })
-</script
+</script>

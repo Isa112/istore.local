@@ -21,12 +21,14 @@ class Goods extends MX_Controller {
         }
     }
 
-    public function view($for_front = false, $url = false) {
+    public function view($for_front = false, $url = false,$subcategory_id) {
         $data['module_name'] = $this->module_name;
         $data['module'] = $this->module;
         if (!$for_front) {
             if (!$url) {
-                $data['entries'] = $this->model->get();
+                $data['entries'] = $this->model->get(false,false,$subcategory_id);
+                $data['subcategories'] = Modules::run('subcategories/get');
+                //var_dump($data['subcategories']);die;
                 foreach($data['entries'] as &$entry)
                 {
                     $entry['subcategory_name'] = $this->getSubCatNameById($entry['subcategory_id']);
@@ -44,15 +46,6 @@ class Goods extends MX_Controller {
                 //$data['entry'] = $this->model->get_by_url($url);
                 $this->load->view('front/tour', $data);
             }
-        }
-    }
-
-    public function buy($id) {
-        if ($this->input->post('do') == 'buy') {
-            $data['id'] = $id;
-            $this->load->view('front/buy_form', $data);
-        } else {
-            
         }
     }
 
@@ -374,6 +367,56 @@ class Goods extends MX_Controller {
         }
     }
 
+     public function get_halls_for_point($id) {
+        $phalls = $this->points_model->get_halls_for_point($id);
+        if (!$phalls) {
+            echo '<div class="alert alert-danger" role="alert">Тренеровочных залов не найдено!</div>';
+        }
+        ?>
+        <div class="row halls">
+            <?php foreach ($phalls as $key => $phall): ?>
+                <div class="col-sm-6 col-md-4" <?php
+                if ($key % 3 == 0) {
+                    echo 'style="clear:both;"';
+                }
+                ?>>
+                    <div class="thumbnail">
+                        <button id="<?= $phall['id'] ?>" type="button" class="close hall_del">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <img src="/images/points/halls/<?= $phall['image'] ?>" width="350" height="240" alt="...">
+                        <div class="caption">
+                            <h3 class="hall_name"><?php
+                                if (!$phall['name']) {
+                                    if ($phall['description'] == '') {
+                                        echo '<input type="text" class="form-control" placeholder="Название">';
+                                    }
+                                } else {
+                                    echo $phall['name'];
+                                }
+                                ?></h3>
+                            <p class="hall_description"><?php
+                                if (!$phall['description']) {
+                                    if ($phall['name'] == '') {
+                                        echo '<textarea class="form-control" rows="5" placeholder="Описание спорт. зала"></textarea>';
+                                    }
+                                } else {
+                                    echo $phall['description'];
+                                }
+                                ?></p>
+                            <p>
+                                <a href="javascript:" class="btn btn-primary hall_save" role="button">Сохранить</a> 
+                                <a href="javascript:" class="btn btn-default hall_edit" role="button">Редактировать</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <?php
+    }
+
     public function get_images($id, $front = false) {
         if ($front) {
             return $this->model->get_images($id);
@@ -389,7 +432,7 @@ class Goods extends MX_Controller {
                 foreach ($pimages as $k => $pimage):
                     $k++;
                     ?>
-                    <div id="image_<?= $pimage['id'] ?>" style="" class="col-xs-4 col-md-2">
+                    <div id="image_<?= $pimage['id'] ?>" style="" class="col-sm-6 col-sm-4">
                         <p class="thumbnail" style="width:100%;height:100%;">
                             <button id="<?= $pimage['id'] ?>" type="button" class="close image_del">
                                 <span aria-hidden="true">&times;</span>
@@ -398,6 +441,20 @@ class Goods extends MX_Controller {
                             <a class="image_view" style="width:100%;height:100%;" href="/images/<?= $this->module . '/' . $pimage['image'] ?>">
                                 <img class="img-rounded" style="width:100%;height:100%;" src="/images/<?= $this->module . '/' . $pimage['image'] ?>" alt="...">
                             </a>
+                            <div class="caption">
+                                <h3 class="good_name"><?php
+                                    if (!$pimage['name']) {
+                                        echo '<input type="text" class="form-control" placeholder="Название">';
+                                    } else {
+                                        echo $pimage['name'];
+                                    }
+                                    ?>
+                                </h3>
+                                <p>
+                                    <a href="javascript:" class="btn btn-primary good_save" role="button">Сохранить</a> 
+                                    <a href="javascript:" class="btn btn-default good_edit" role="button">Редактировать</a>
+                                </p>
+                            </div>
                         </p>
                     </div>
                     <?php if ($k % 6 == 0): ?>
@@ -480,6 +537,12 @@ class Goods extends MX_Controller {
     public function getAttrNameById($id)
     {
         return $this->model->getAttrNameById($id);
+    }
+
+    public function good_data_save()
+    {
+        var_dump($_POST);
+        $this->model->good_data_save();
     }
 
 

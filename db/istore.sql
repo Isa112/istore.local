@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 31 2015 г., 08:18
+-- Время создания: Апр 06 2015 г., 15:00
 -- Версия сервера: 5.5.41-log
 -- Версия PHP: 5.4.35
 
@@ -187,6 +187,7 @@ CREATE TABLE IF NOT EXISTS `blog` (
   `name` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   `text` text NOT NULL,
+  `category_id` int(11) NOT NULL,
   `date` datetime NOT NULL,
   `title` varchar(255) NOT NULL,
   `desc` text NOT NULL,
@@ -203,14 +204,14 @@ CREATE TABLE IF NOT EXISTS `blog` (
 -- Дамп данных таблицы `blog`
 --
 
-INSERT INTO `blog` (`id`, `name`, `url`, `text`, `date`, `title`, `desc`, `keyw`, `image`, `order`, `views`, `active`) VALUES
-(12, 'Юбилейный 20-ый Дубайский торговый фестиваль: путешествие в роскошь', 'jubilejnyj_20-yj_dubajskij_torgovyj_festival_puteshestvie_v_roskosh', '<p><span style="color:rgb(20, 24, 35); font-family:helvetica,arial,lucida grande,tahoma,verdana,arial,sans-serif; font-size:14px">Юбилейный 20-ый Дубайский торговый фестиваль: путешествие в роскошь</span><br />\n<br />\n<span style="color:rgb(20, 24, 35); font-family:helvetica,arial,lucida grande,tahoma,verdana,arial,sans-serif; font-size:14px">■ Двадцатый Дубайский торговый фестиваль под лозунгом &laquo;20 лет путешествий &ndash; из праздника в праздник&rdquo; пройдет с 1 января по 1 февраля 2015 и станет первым в череде ярких с</span><span style="color:rgb(20, 24, 35); font-family:helvetica,arial,lucida grande,tahoma,verdana,arial,sans-serif; font-size:14px">обытий в Дубае в новом году.&nbsp;<br />\nВпервые фестиваль прошел в 1996 году; в настоящее время он превратился в самое продолжительное мероприятие такого рода в мире, в значительной мере способствуя продвижению Дубая как туристического направления и предлагая жителям города и туристам яркие впечатления. За период с 1996 по 2014 года фестиваль посетило приблизительно 56 млн. человек, а общая сумма затрат составила $ 40 млрд.<br />\n<br />\nТри составляющих успеха Дубайского торгового фестиваля &ndash; развлечения, шопинг и розыгрыш различных призов.&nbsp;<br />\n<br />\nДля привлечения к участию в фестивале как можно большего количества людей мероприятия проходят не только в торговых центрах, но и в общественных местах, на главных улицах города, например на Бульваре Мохаммеда Бин Рашида, а также в Ковровом оазисе, в историческом районе Шиндага, во Всемирной деревне и парках.&nbsp;<br />\n<br />\nКрасочные фестивальные мероприятия мирового уровня, рассчитанные на всех членов семьи, неизменно привлекают внимание как жителей города, так и туристов со всего мира.&nbsp;<br />\n<br />\nНеизменный хит &ndash; мюзикл MAMMA MIA &ndash; можно будет увидеть со 2 по 10 января 2015г. на сцене зала Шейха Рашида в Дубайском центре международной торговли. Это шоу посмотрело уже более 54 млн. зрителей во всем мире, ведь за время его существования было сделано 39 различных постановок на 14 языках.<br />\n<br />\nС 15 по 17 января на сцене Мадинат арены будет представлен классический балет &laquo;Ромео и Джульетта&raquo; в исполнении самой известной европейской труппы Балет Монте-Карло под руководством одного из лучших мировых хореографов Жана Кристофа Майо (Jean Chrostoph Maillot).<br />\n<br />\nЮбилейный фестиваль вновь подтвердит уникальные возможности лучшего в мире шопинга, уникального и разнообразного, будь то городские и традиционные рынки или первоклассные торговые центры. Дубай действительно является мировым центром шопинга, вторым после Лондона городом, по количеству представленных международных розничных брендов. В фестивале примут участие более 70 торговых центров и 6000 магазинов, а скидки на разные товары, начиная от золота, парфюмерии, одежды модных брендов, машин, электроники до текстиля и изделий ручной работы достигают 75%.<br />\nКроме того, будет представлены уникальные модные концепции, например Celebrity Pop-up Shop с коллекциями одежды от известных дизайнеров или владельцев брендов, ранее не представленными в ОАЭ. Здесь же пройдут показы мод, автограф-сессии и стайлинг-сессии. В течение трех недель в магазине будут попеременно представлены коллекции трех дизайнеров. Так, с 15 по 21 января 2015 известная американская актриса и дизайнер Николь Ричи представит свою ювелирную линию House of Harlow 1090. Украшения в ретро стиле из этой коллекции носят Мадонна и Эшли Симпсон. Celebrity Pop-up Shop расположится на пляже The Beach &ndash; Jumeirah Beach Residence.<br />\n<br />\nИ конечно, же, Дубайский торговый фестиваль славится лотереями крупных денежных призов, роскошных автомобилей и золота.&nbsp;<br />\n<br />\nМега лотерея Gold &amp; Jewellery Mega Raffle даст шанс выиграть призы на сумму до 15 млн. дирхам, включая золото весом до 100 кг и бриллианты общим весом до 40 карат. А в рамках мега лотереи Infinity Mega Raffle ежедневно будет разыгрываться приз, состоящий из двух автомобилей QX 60 и QX 50 и 100 000 дирхам. В ходе еженедельных розыгрышей этой лотереи будут также разыграны призы на сумму 2 млн. дирхам. Для участия необходимо приобрести лотерейный билет стоимостью 200 дирхам (ок $54).&nbsp;<br />\n<br />\nВо время Дубайского торгового фестиваля организаторы планируют попасть в Книгу рекордов Гиннеса, создав золотую цепь ручной работы длиной 5 км (&lsquo;Dubai celebration Chain&rdquo;). Всем желающим будет предоставлена возможность приобрести части этой цепи, так как они будут выставлены на продажу.&nbsp;</span></p>\n', '2016-01-01 06:00:00', 'Юбилейный 20-ый Дубайский торговый фестиваль: путешествие в роскошь', 'Юбилейный 20-ый Дубайский торговый фестиваль: путешествие в роскошь', 'Юбилейный 20-ый Дубайский торговый фестиваль: путешествие в роскошь', 'd2480590815c9b77c37bb88443e72e86.jpg', 1, 0, 'on'),
-(14, 'Акция! Отдых со скидкой 35 % на двоих: 7 дней и 6 ночей в шикарных отелях Дубая.', 'akcija_otdyh_so_skidkoj_35__na_dvoih_7_dnej_i_6_nochej_v_shikarnyh_oteljah_dubaja.', '<p>Акция! Отдых со скидкой 35 % на двоих: 7 дней и 6 ночей в шикарных отелях Дубая.</p>\n', '1970-01-01 06:00:00', '', '', '', '1aff9f82eaf909c0ecf9feffeb079e37.jpg', 2, 0, 'on'),
-(15, 'Гоа', 'goa', '<p>Уважаемые друзья,&nbsp;<br />\nрады предложить Вам ГОРЯЩИЕ ТУРЫ в ГОА от 491 USD !!!&nbsp;<br />\nВЫЛЕТЫ 21.02, 28.02, 04.03 А/К SUNDAY AIRLINES</p>\n\n<p>В стоимость тура включено:&nbsp;<br />\n-авиабилет Алматы-Гоа-Алматы а/к Sunday Airlines,<br />\n-проживание в отеле один в двухместном номере,&nbsp;<br />\n-питание по концепции отеля, медицинская страховка,&nbsp;<br />\n-групповой трансфер,</p>\n\n<div class="text_exposed_show" style="display: inline; color: rgb(20, 24, 35); font-family: ''lucida grande'', tahoma, verdana, arial, sans-serif; line-height: 17.9400005340576px;">\n<p>Про Гоа:&nbsp;<br />\nГоа-самый маленький штат в Индии, абсолютно не похожий на остальную Индию, но вместе с этим и один из самых лучших мировых курортов, раскинувшийся на берегу Аравийского моря. Побережье на этом экзотическом курорте протянулось более чем на 110 км, образовав 40 великолепных пляжей. Считается, что Гоа очень популярен среди туристов сразу по нескольким причинам: во-первых, многих манят просторные золотые пляжи Гоа, протянувшиеся на многие километры вдоль потрясающих берегов Аравийского моря. Других туристов влекут древние памятники Индии, легко доступные во время одно-двухдневных экскурсий, организуемых из штата Гоа. Третьих в Гоа привлекает дешевизна отдыха. А смешение стилей, рас и культур делают Гоа непохожим на другие индийские штаты.</p>\n\n<p>СПЕШИТЕ! КОЛИЧЕСТВО МЕСТ ОГРАНИЧЕНО!&nbsp;<br />\nТУРЫ МОГУТ БЫТЬ ИЗМЕНЕНЫ и ПРИСПОСОБЛЕНЫ ПОД ПЕРСОНАЛЬНЫЙ ЗАПРОС!<br />\nПолучить более подробную, персональную информацию можно, отправив запрос по электронному адресу:&nbsp;<br />\ntour@travelshop.kg, tour1@travelshop.kg&nbsp;<br />\nа также по телефонам:&nbsp;<br />\n0312 66 21 21, 0701 66 21 21, 0554 66 21 21</p>\n</div>\n', '2015-02-16 06:00:00', 'гоа', 'Туры в Гоа из бишкека', 'туры, гоа, индия,бишкек', '92e9a63ca45f8f4c1361e9a4b14d877e.jpg', 3, 0, 'on'),
-(16, 'Дубай', 'dubaj', '<div class="_5pbx userContent" style="line-height: 1.38; overflow: hidden;">\n<p>Друзья, мы продлили акцию на&nbsp;<a class="profileLink" href="https://www.facebook.com/BeSmart.KG" style="color: rgb(59, 89, 152); cursor: pointer; text-decoration: none;">BeSmart.KG</a>&nbsp;еще на одну неделю.&nbsp;<br />\nОтдых со скидкой 35 % на двоих: 7 дней и 6 ночей в шикарных отелях Дубая.&nbsp;<br />\n<a href="http://besmart.kg/event/travel-oae/" rel="nofollow" style="color: rgb(59, 89, 152); cursor: pointer; text-decoration: none;" target="_blank">http://besmart.kg/event/travel-oae/</a></p>\n</div>\n\n<div>\n<div>\n<div class="mtm" style="margin-top: 10px;">\n<div class="_6m2 _1zpr clearfix _dcs _4_w4 _59ap _2ec0" id="u_ps_0_0_9" style="zoom: 1; -webkit-box-shadow: rgba(0, 0, 0, 0.14902) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.0980392) 0px 1px 4px; position: relative; overflow: hidden; z-index: 0;">\n<div class="clearfix _2r3x" style="zoom: 1;">\n<div class="lfloat _ohe" style="float: left; width: 470px;">\n<div class="_6ks" style="line-height: 0; position: relative; z-index: 1;">\n<div class="_6l- __c_" style="position: relative;">\n<div class="uiScaledImageContainer _6m5 fbStoryAttachmentImage" style="position: relative; overflow: hidden; height: 246px; width: 470px; background-position: 50% 50%; background-repeat: no-repeat;"><a href="http://besmart.kg/event/travel-oae/" rel="nofollow" style="color: rgb(59, 89, 152); cursor: pointer; text-decoration: none;" target="_blank"><img alt="" class="img scaledImageFitWidth" src="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQCs3znW-f2xecpC&amp;w=470&amp;h=246&amp;url=http%3A%2F%2Fbesmart.kg%2Fmedia%2Fupload%2Fdubai_oae_pfoto_2.jpg&amp;cfs=1&amp;upscale=1" style="border:0px; height:auto; min-height:100%; position:relative; width:470px" /></a></div>\n</div>\n</div>\n\n<div class="_3ekx">\n<div class="_6m3" style="font-size: 12px; height: auto; margin: 10px 12px; position: relative; max-height: 100px; color: rgb(20, 24, 35); font-family: ''lucida grande'', tahoma, verdana, arial, sans-serif;">\n<div class="mbs _6m6" style="margin-bottom: 5px; font-family: Georgia, ''lucida grande'', tahoma, verdana, arial, sans-serif; font-size: 18px; line-height: 22px; max-height: 110px; overflow: hidden; word-wrap: break-word; transition: color 0.1s ease-in-out; -webkit-transition: color 0.1s ease-in-out;"><a href="http://l.facebook.com/l.php?u=http%3A%2F%2Fbesmart.kg%2Fevent%2Ftravel-oae%2F&amp;h=lAQHr_6wf&amp;s=1" rel="nofollow" style="color: rgb(20, 24, 35); cursor: pointer; text-decoration: none; -webkit-transition: color 0.1s ease-in-out; transition: color 0.1s ease-in-out;" target="_blank">Travel Shop Отдых на двоих: 7 дней и 6 ночей в шикарных отелях ОАЭ</a></div>\n\n<div class="_6ma">\n<div class="_6m7" style="font-family: Helvetica; line-height: 16px; max-height: 80px; overflow: hidden;">В ОАЭ не бывает плохой погоды и низкого сезона &mdash; ведь здесь что в ноябре, что в июле роскошные отели для качественного отдыха и отличный шопинг...</div>\n\n<div class="_59tj" style="padding-top: 9px; position: relative;">\n<div class="_6lz _6mb ellipsis" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: rgb(145, 151, 163); font-size: 11px; line-height: 11px; text-transform: uppercase;">BESMART.KG</div>\n\n<div>&nbsp;</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n', '2015-02-16 05:00:00', 'Дубай', 'Горящие Туры в Дубай из Бишкек', 'Бишкек, туры, цены, авиабилеты Флай дубай', '0b96d2aa0772c3b510c73b91d11d0e2e.jpg', 0, 0, 'on'),
-(17, 'Акция на авиабилеты в Дубай!', 'akcija_na_aviabilety_fly_dubai_1__1', '<p><span style="font-size:18px"><span style="font-family:georgia,serif"><span style="color:#000080"><strong>Друзья, напоминаем об акции на авиабилеты &quot;FLY DUBAI&quot;1 + 1. При покупке одного билета по цене 559$, по маршруту Бишкек-Дубай-Бишкек, второй БЕСПЛАТНО! Мы также можем подобрать отели в ОАЭ по самым выгодным ценам! Медицинская страховка в ПОДАРОК!</strong></span></span></span></p>\n', '2015-02-18 11:52:00', '', '', '', '88acf18da8a559a93b3c4e75855e87ec.jpg', 0, 0, 'on'),
-(18, 'Акция на авиабилеты в Стамбул !', 'akcija_na_aviabilety_v_stambul__', '<p><span >Акция на авиабилеты в Стамбул !&nbsp;</span><br />\n<span >', '2015-02-18 10:33:00', 'авиабилеты бишкек', 'дешевые авиабилеты в Стамбул из Бишкека турецкие авиалинии', 'авиабилеты в Стамбул из бишкека', '9fc5d78f8fa0e6c30f6d68e2e5f30d9d.png', 1, 0, 'on'),
-(19, 'Купите себе лето! Тур в Тайланд (Паттайя)', 'kupite_sebe_leto_tur_v_tajland_(pattajja)', '<p>Купите себе лето!<br />\nТур в Тайланд (Паттайя),&nbsp;<br />\nс 31.01 по 08.02.2015, 8 ночей/9 дней,&nbsp;<br />\nОтель Sawasdee Sabai 3*,&nbsp;<br />\nномер Standard Room 1775$ на 2 человека.</p>\n\n<div class="text_exposed_show">\n<p>В стоимость тура входит:<br />\nАвиаперелёт: Алматы-Бангкок-Алматы, авиакомпания &laquo;Air Astana&raquo;<br />\nПроживание<br />\nПитание (Завтраки)<br />\nГрупповой трансфер: аэропорт-отель-аэропорт<br />\nМедицинские страховки</p>\n\n<p><a href="http://www.tripadvisor.ru/Hotel_Review-g293919-d1106387-Reviews-Sawasdee_Sabai-Pattaya_Chonburi_Province.html" rel="nofollow" target="_blank">http://www.tripadvisor.ru/Hotel_Review-g293919-d1106387-Rev&hellip;</a></p>\n\n<p>СПЕШИТЕ! КОЛИЧЕСТВО МЕСТ ОГРАНИЧЕНО!&nbsp;<br />\nТУРЫ МОГУТ БЫТЬ ИЗМЕНЕНЫ и ПРИСПОСОБЛЕНЫ ПОД ПЕРСОНАЛЬНЫЙ ЗАПРОС!</p>\n\n<p>Получить более подробную, персональную информацию<br />\nможно, отправив запрос по электронному адресу: tour@travelshop.kg, tour1@travelshop.kg&nbsp;<br />\nа также по телефону: 0312 66 21 21, 0701 66 21 21, 0554 66 21 21<br />\nДрузья! Если Вас заинтересует отдых за рубежом, авиабилеты, визы &ndash; будем рады помочь &laquo;Travel Shop&raquo;&nbsp;<br />\nг. Бишкек, ул Советская 135, тел.: 66 20 20, 66 21 21, 0701 66 21 21, 0554 66 21 21!<br />\n<a href="http://l.facebook.com/l.php?u=http://travelshop.kg/&amp;h=pAQEe7S28&amp;enc=AZNxsVIYIHUDk4Ri27GCg6byMA2ltFqzMMQaApl_f17QcQEUba8TVDO2rXjNn2Oy4E8StjlA8UxEsF0V3-rzTJqOQSy42vjJIBWfzkQjOSlmgqVXwbyfiZz9uOKhz2Xzp2UzLm0iJW3kKi5JZbcyXOMVLUAAs33kft40DqzCOC4tsw&amp;s=1" rel="nofollow" target="_blank">http://travelshop.kg/</a></p>\n</div>\n', '2015-01-18 11:08:00', 'Тур в тайланд из Бишкека', 'Купите себе лето!\nТур в Тайланд (Паттайя) из Алматы', 'Купите себе лето!\nТур в Тайланд (Паттайя) из Алматы', '0a515450b0d4c94e0b923c9c92d08a87.jpg', 2, 0, 'on');
+INSERT INTO `blog` (`id`, `name`, `url`, `text`, `category_id`, `date`, `title`, `desc`, `keyw`, `image`, `order`, `views`, `active`) VALUES
+(12, 'Юбилейный 20-ый Дубайский торговый фестиваль: путешествие в роскошь', 'jubilejnyj_20-yj_dubajskij_torgovyj_festival_puteshestvie_v_roskosh', '<p><span style="color:rgb(20, 24, 35); font-family:helvetica,arial,lucida grande,tahoma,verdana,arial,sans-serif; font-size:14px">Юбилейный 20-ый Дубайский торговый фестиваль: путешествие в роскошь</span><br />\n<br />\n<span style="color:rgb(20, 24, 35); font-family:helvetica,arial,lucida grande,tahoma,verdana,arial,sans-serif; font-size:14px">■ Двадцатый Дубайский торговый фестиваль под лозунгом &laquo;20 лет путешествий &ndash; из праздника в праздник&rdquo; пройдет с 1 января по 1 февраля 2015 и станет первым в череде ярких с</span><span style="color:rgb(20, 24, 35); font-family:helvetica,arial,lucida grande,tahoma,verdana,arial,sans-serif; font-size:14px">обытий в Дубае в новом году.&nbsp;<br />\nВпервые фестиваль прошел в 1996 году; в настоящее время он превратился в самое продолжительное мероприятие такого рода в мире, в значительной мере способствуя продвижению Дубая как туристического направления и предлагая жителям города и туристам яркие впечатления. За период с 1996 по 2014 года фестиваль посетило приблизительно 56 млн. человек, а общая сумма затрат составила $ 40 млрд.<br />\n<br />\nТри составляющих успеха Дубайского торгового фестиваля &ndash; развлечения, шопинг и розыгрыш различных призов.&nbsp;<br />\n<br />\nДля привлечения к участию в фестивале как можно большего количества людей мероприятия проходят не только в торговых центрах, но и в общественных местах, на главных улицах города, например на Бульваре Мохаммеда Бин Рашида, а также в Ковровом оазисе, в историческом районе Шиндага, во Всемирной деревне и парках.&nbsp;<br />\n<br />\nКрасочные фестивальные мероприятия мирового уровня, рассчитанные на всех членов семьи, неизменно привлекают внимание как жителей города, так и туристов со всего мира.&nbsp;<br />\n<br />\nНеизменный хит &ndash; мюзикл MAMMA MIA &ndash; можно будет увидеть со 2 по 10 января 2015г. на сцене зала Шейха Рашида в Дубайском центре международной торговли. Это шоу посмотрело уже более 54 млн. зрителей во всем мире, ведь за время его существования было сделано 39 различных постановок на 14 языках.<br />\n<br />\nС 15 по 17 января на сцене Мадинат арены будет представлен классический балет &laquo;Ромео и Джульетта&raquo; в исполнении самой известной европейской труппы Балет Монте-Карло под руководством одного из лучших мировых хореографов Жана Кристофа Майо (Jean Chrostoph Maillot).<br />\n<br />\nЮбилейный фестиваль вновь подтвердит уникальные возможности лучшего в мире шопинга, уникального и разнообразного, будь то городские и традиционные рынки или первоклассные торговые центры. Дубай действительно является мировым центром шопинга, вторым после Лондона городом, по количеству представленных международных розничных брендов. В фестивале примут участие более 70 торговых центров и 6000 магазинов, а скидки на разные товары, начиная от золота, парфюмерии, одежды модных брендов, машин, электроники до текстиля и изделий ручной работы достигают 75%.<br />\nКроме того, будет представлены уникальные модные концепции, например Celebrity Pop-up Shop с коллекциями одежды от известных дизайнеров или владельцев брендов, ранее не представленными в ОАЭ. Здесь же пройдут показы мод, автограф-сессии и стайлинг-сессии. В течение трех недель в магазине будут попеременно представлены коллекции трех дизайнеров. Так, с 15 по 21 января 2015 известная американская актриса и дизайнер Николь Ричи представит свою ювелирную линию House of Harlow 1090. Украшения в ретро стиле из этой коллекции носят Мадонна и Эшли Симпсон. Celebrity Pop-up Shop расположится на пляже The Beach &ndash; Jumeirah Beach Residence.<br />\n<br />\nИ конечно, же, Дубайский торговый фестиваль славится лотереями крупных денежных призов, роскошных автомобилей и золота.&nbsp;<br />\n<br />\nМега лотерея Gold &amp; Jewellery Mega Raffle даст шанс выиграть призы на сумму до 15 млн. дирхам, включая золото весом до 100 кг и бриллианты общим весом до 40 карат. А в рамках мега лотереи Infinity Mega Raffle ежедневно будет разыгрываться приз, состоящий из двух автомобилей QX 60 и QX 50 и 100 000 дирхам. В ходе еженедельных розыгрышей этой лотереи будут также разыграны призы на сумму 2 млн. дирхам. Для участия необходимо приобрести лотерейный билет стоимостью 200 дирхам (ок $54).&nbsp;<br />\n<br />\nВо время Дубайского торгового фестиваля организаторы планируют попасть в Книгу рекордов Гиннеса, создав золотую цепь ручной работы длиной 5 км (&lsquo;Dubai celebration Chain&rdquo;). Всем желающим будет предоставлена возможность приобрести части этой цепи, так как они будут выставлены на продажу.&nbsp;</span></p>\n', 0, '2016-01-01 06:00:00', 'Юбилейный 20-ый Дубайский торговый фестиваль: путешествие в роскошь', 'Юбилейный 20-ый Дубайский торговый фестиваль: путешествие в роскошь', 'Юбилейный 20-ый Дубайский торговый фестиваль: путешествие в роскошь', 'd2480590815c9b77c37bb88443e72e86.jpg', 1, 0, 'on'),
+(14, 'Акция! Отдых со скидкой 35 % на двоих: 7 дней и 6 ночей в шикарных отелях Дубая.', 'akcija_otdyh_so_skidkoj_35__na_dvoih_7_dnej_i_6_nochej_v_shikarnyh_oteljah_dubaja.', '<p>Акция! Отдых со скидкой 35 % на двоих: 7 дней и 6 ночей в шикарных отелях Дубая.</p>\n', 0, '1970-01-01 06:00:00', '', '', '', '1aff9f82eaf909c0ecf9feffeb079e37.jpg', 2, 0, 'on'),
+(15, 'Гоа', 'goa', '<p>Уважаемые друзья,&nbsp;<br />\r\nрады предложить Вам ГОРЯЩИЕ ТУРЫ в ГОА от 491 USD !!!&nbsp;<br />\r\nВЫЛЕТЫ 21.02, 28.02, 04.03 А/К SUNDAY AIRLINES</p>\r\n\r\n<p>В стоимость тура включено:&nbsp;<br />\r\n-авиабилет Алматы-Гоа-Алматы а/к Sunday Airlines,<br />\r\n-проживание в отеле один в двухместном номере,&nbsp;<br />\r\n-питание по концепции отеля, медицинская страховка,&nbsp;<br />\r\n-групповой трансфер,</p>\r\n\r\n<div class="text_exposed_show" style="display: inline; color: rgb(20, 24, 35); font-family: ''lucida grande'', tahoma, verdana, arial, sans-serif; line-height: 17.9400005340576px;">\r\n<p>Про Гоа:&nbsp;<br />\r\nГоа-самый маленький штат в Индии, абсолютно не похожий на остальную Индию, но вместе с этим и один из самых лучших мировых курортов, раскинувшийся на берегу Аравийского моря. Побережье на этом экзотическом курорте протянулось более чем на 110 км, образовав 40 великолепных пляжей. Считается, что Гоа очень популярен среди туристов сразу по нескольким причинам: во-первых, многих манят просторные золотые пляжи Гоа, протянувшиеся на многие километры вдоль потрясающих берегов Аравийского моря. Других туристов влекут древние памятники Индии, легко доступные во время одно-двухдневных экскурсий, организуемых из штата Гоа. Третьих в Гоа привлекает дешевизна отдыха. А смешение стилей, рас и культур делают Гоа непохожим на другие индийские штаты.</p>\r\n\r\n<p>СПЕШИТЕ! КОЛИЧЕСТВО МЕСТ ОГРАНИЧЕНО!&nbsp;<br />\r\nТУРЫ МОГУТ БЫТЬ ИЗМЕНЕНЫ и ПРИСПОСОБЛЕНЫ ПОД ПЕРСОНАЛЬНЫЙ ЗАПРОС!<br />\r\nПолучить более подробную, персональную информацию можно, отправив запрос по электронному адресу:&nbsp;<br />\r\ntour@travelshop.kg, tour1@travelshop.kg&nbsp;<br />\r\nа также по телефонам:&nbsp;<br />\r\n0312 66 21 21, 0701 66 21 21, 0554 66 21 21</p>\r\n</div>\r\n', 58, '2015-02-16 06:00:00', 'гоа', 'Туры в Гоа из бишкека', 'туры, гоа, индия,бишкек', '92e9a63ca45f8f4c1361e9a4b14d877e.jpg', 3, 0, 'on'),
+(16, 'Дубай', 'dubaj', '<div class="_5pbx userContent" style="line-height: 1.38; overflow: hidden;">\n<p>Друзья, мы продлили акцию на&nbsp;<a class="profileLink" href="https://www.facebook.com/BeSmart.KG" style="color: rgb(59, 89, 152); cursor: pointer; text-decoration: none;">BeSmart.KG</a>&nbsp;еще на одну неделю.&nbsp;<br />\nОтдых со скидкой 35 % на двоих: 7 дней и 6 ночей в шикарных отелях Дубая.&nbsp;<br />\n<a href="http://besmart.kg/event/travel-oae/" rel="nofollow" style="color: rgb(59, 89, 152); cursor: pointer; text-decoration: none;" target="_blank">http://besmart.kg/event/travel-oae/</a></p>\n</div>\n\n<div>\n<div>\n<div class="mtm" style="margin-top: 10px;">\n<div class="_6m2 _1zpr clearfix _dcs _4_w4 _59ap _2ec0" id="u_ps_0_0_9" style="zoom: 1; -webkit-box-shadow: rgba(0, 0, 0, 0.14902) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.0980392) 0px 1px 4px; position: relative; overflow: hidden; z-index: 0;">\n<div class="clearfix _2r3x" style="zoom: 1;">\n<div class="lfloat _ohe" style="float: left; width: 470px;">\n<div class="_6ks" style="line-height: 0; position: relative; z-index: 1;">\n<div class="_6l- __c_" style="position: relative;">\n<div class="uiScaledImageContainer _6m5 fbStoryAttachmentImage" style="position: relative; overflow: hidden; height: 246px; width: 470px; background-position: 50% 50%; background-repeat: no-repeat;"><a href="http://besmart.kg/event/travel-oae/" rel="nofollow" style="color: rgb(59, 89, 152); cursor: pointer; text-decoration: none;" target="_blank"><img alt="" class="img scaledImageFitWidth" src="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQCs3znW-f2xecpC&amp;w=470&amp;h=246&amp;url=http%3A%2F%2Fbesmart.kg%2Fmedia%2Fupload%2Fdubai_oae_pfoto_2.jpg&amp;cfs=1&amp;upscale=1" style="border:0px; height:auto; min-height:100%; position:relative; width:470px" /></a></div>\n</div>\n</div>\n\n<div class="_3ekx">\n<div class="_6m3" style="font-size: 12px; height: auto; margin: 10px 12px; position: relative; max-height: 100px; color: rgb(20, 24, 35); font-family: ''lucida grande'', tahoma, verdana, arial, sans-serif;">\n<div class="mbs _6m6" style="margin-bottom: 5px; font-family: Georgia, ''lucida grande'', tahoma, verdana, arial, sans-serif; font-size: 18px; line-height: 22px; max-height: 110px; overflow: hidden; word-wrap: break-word; transition: color 0.1s ease-in-out; -webkit-transition: color 0.1s ease-in-out;"><a href="http://l.facebook.com/l.php?u=http%3A%2F%2Fbesmart.kg%2Fevent%2Ftravel-oae%2F&amp;h=lAQHr_6wf&amp;s=1" rel="nofollow" style="color: rgb(20, 24, 35); cursor: pointer; text-decoration: none; -webkit-transition: color 0.1s ease-in-out; transition: color 0.1s ease-in-out;" target="_blank">Travel Shop Отдых на двоих: 7 дней и 6 ночей в шикарных отелях ОАЭ</a></div>\n\n<div class="_6ma">\n<div class="_6m7" style="font-family: Helvetica; line-height: 16px; max-height: 80px; overflow: hidden;">В ОАЭ не бывает плохой погоды и низкого сезона &mdash; ведь здесь что в ноябре, что в июле роскошные отели для качественного отдыха и отличный шопинг...</div>\n\n<div class="_59tj" style="padding-top: 9px; position: relative;">\n<div class="_6lz _6mb ellipsis" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: rgb(145, 151, 163); font-size: 11px; line-height: 11px; text-transform: uppercase;">BESMART.KG</div>\n\n<div>&nbsp;</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n', 0, '2015-02-16 05:00:00', 'Дубай', 'Горящие Туры в Дубай из Бишкек', 'Бишкек, туры, цены, авиабилеты Флай дубай', '0b96d2aa0772c3b510c73b91d11d0e2e.jpg', 0, 0, 'on'),
+(17, 'Акция на авиабилеты в Дубай!', 'akcija_na_aviabilety_fly_dubai_1__1', '<p><span style="font-size:18px"><span style="font-family:georgia,serif"><span style="color:#000080"><strong>Друзья, напоминаем об акции на авиабилеты &quot;FLY DUBAI&quot;1 + 1. При покупке одного билета по цене 559$, по маршруту Бишкек-Дубай-Бишкек, второй БЕСПЛАТНО! Мы также можем подобрать отели в ОАЭ по самым выгодным ценам! Медицинская страховка в ПОДАРОК!</strong></span></span></span></p>\n', 0, '2015-02-18 11:52:00', '', '', '', '88acf18da8a559a93b3c4e75855e87ec.jpg', 0, 0, 'on'),
+(18, 'Акция на авиабилеты в Стамбул !', 'akcija_na_aviabilety_v_stambul__', '<p><span >Акция на авиабилеты в Стамбул !&nbsp;</span><br />\n<span >', 0, '2015-02-18 10:33:00', 'авиабилеты бишкек', 'дешевые авиабилеты в Стамбул из Бишкека турецкие авиалинии', 'авиабилеты в Стамбул из бишкека', '9fc5d78f8fa0e6c30f6d68e2e5f30d9d.png', 1, 0, 'on'),
+(19, 'Купите себе лето! Тур в Тайланд (Паттайя)', 'kupite_sebe_leto_tur_v_tajland_(pattajja)', '<p>Купите себе лето!<br />\nТур в Тайланд (Паттайя),&nbsp;<br />\nс 31.01 по 08.02.2015, 8 ночей/9 дней,&nbsp;<br />\nОтель Sawasdee Sabai 3*,&nbsp;<br />\nномер Standard Room 1775$ на 2 человека.</p>\n\n<div class="text_exposed_show">\n<p>В стоимость тура входит:<br />\nАвиаперелёт: Алматы-Бангкок-Алматы, авиакомпания &laquo;Air Astana&raquo;<br />\nПроживание<br />\nПитание (Завтраки)<br />\nГрупповой трансфер: аэропорт-отель-аэропорт<br />\nМедицинские страховки</p>\n\n<p><a href="http://www.tripadvisor.ru/Hotel_Review-g293919-d1106387-Reviews-Sawasdee_Sabai-Pattaya_Chonburi_Province.html" rel="nofollow" target="_blank">http://www.tripadvisor.ru/Hotel_Review-g293919-d1106387-Rev&hellip;</a></p>\n\n<p>СПЕШИТЕ! КОЛИЧЕСТВО МЕСТ ОГРАНИЧЕНО!&nbsp;<br />\nТУРЫ МОГУТ БЫТЬ ИЗМЕНЕНЫ и ПРИСПОСОБЛЕНЫ ПОД ПЕРСОНАЛЬНЫЙ ЗАПРОС!</p>\n\n<p>Получить более подробную, персональную информацию<br />\nможно, отправив запрос по электронному адресу: tour@travelshop.kg, tour1@travelshop.kg&nbsp;<br />\nа также по телефону: 0312 66 21 21, 0701 66 21 21, 0554 66 21 21<br />\nДрузья! Если Вас заинтересует отдых за рубежом, авиабилеты, визы &ndash; будем рады помочь &laquo;Travel Shop&raquo;&nbsp;<br />\nг. Бишкек, ул Советская 135, тел.: 66 20 20, 66 21 21, 0701 66 21 21, 0554 66 21 21!<br />\n<a href="http://l.facebook.com/l.php?u=http://travelshop.kg/&amp;h=pAQEe7S28&amp;enc=AZNxsVIYIHUDk4Ri27GCg6byMA2ltFqzMMQaApl_f17QcQEUba8TVDO2rXjNn2Oy4E8StjlA8UxEsF0V3-rzTJqOQSy42vjJIBWfzkQjOSlmgqVXwbyfiZz9uOKhz2Xzp2UzLm0iJW3kKi5JZbcyXOMVLUAAs33kft40DqzCOC4tsw&amp;s=1" rel="nofollow" target="_blank">http://travelshop.kg/</a></p>\n</div>\n', 0, '2015-01-18 11:08:00', 'Тур в тайланд из Бишкека', 'Купите себе лето!\nТур в Тайланд (Паттайя) из Алматы', 'Купите себе лето!\nТур в Тайланд (Паттайя) из Алматы', '0a515450b0d4c94e0b923c9c92d08a87.jpg', 2, 0, 'on');
 
 -- --------------------------------------------------------
 
@@ -221,12 +222,13 @@ INSERT INTO `blog` (`id`, `name`, `url`, `text`, `date`, `title`, `desc`, `keyw`
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `text` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   `order` int(11) NOT NULL,
   `active` varchar(2) NOT NULL,
   `url` varchar(255) NOT NULL,
-  `title` varchar(255) NOT NULL,
+  `text` text NOT NULL,
+  `metatitle` varchar(255) NOT NULL,
   `desc` varchar(255) NOT NULL,
   `keyw` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
@@ -237,11 +239,11 @@ CREATE TABLE IF NOT EXISTS `categories` (
 -- Дамп данных таблицы `categories`
 --
 
-INSERT INTO `categories` (`id`, `text`, `image`, `order`, `active`, `url`, `title`, `desc`, `keyw`) VALUES
-(56, 'Mac', '6d9d3f71e0e696d791da48e5c0c7a081.png', 0, 'on', 'mac', 'dasda', 'asdasd', '123'),
-(57, 'iPad', '8ef29d406aa9c17082209f748c10f7d3.png', 0, 'on', 'ipad', '', '', ''),
-(58, 'iPhone', '3f23e3289b597925733aafc75d155719.png', 0, 'on', 'iphone', '', '', ''),
-(59, 'iPod', 'ea4ffbc57e75e11ba07274e5a11aa694.png', 0, 'on', 'ipod', '', '', '');
+INSERT INTO `categories` (`id`, `name`, `image`, `order`, `active`, `url`, `text`, `metatitle`, `desc`, `keyw`) VALUES
+(56, 'Mac', '6d9d3f71e0e696d791da48e5c0c7a081.png', 0, 'on', 'mac', '', 'dasda', 'asdasd', '123'),
+(57, 'iPad', '8ef29d406aa9c17082209f748c10f7d3.png', 0, 'on', 'ipad', '', '', '', ''),
+(58, 'iPhone', '3f23e3289b597925733aafc75d155719.png', 0, 'on', 'iphone', '', '', '', ''),
+(59, 'iPod', 'ea4ffbc57e75e11ba07274e5a11aa694.png', 0, 'on', 'ipod', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -370,45 +372,46 @@ INSERT INTO `goods` (`id`, `name`, `url`, `price`, `subcategory_id`, `imageBg`, 
 DROP TABLE IF EXISTS `goods_images`;
 CREATE TABLE IF NOT EXISTS `goods_images` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   `order` int(11) NOT NULL,
   `good_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=191 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=192 ;
 
 --
 -- Дамп данных таблицы `goods_images`
 --
 
-INSERT INTO `goods_images` (`id`, `image`, `order`, `good_id`) VALUES
-(50, '1420715108_33a3e9448b41955773178aeca5623c8c.jpg', 0, 15),
-(55, '1423770358_891d585b516186324eedec5ea32ffd70.png', 0, 11),
-(56, '1423770368_547f98384d7ec77fd0b2bea1ca6c1390.jpg', 0, 11),
-(57, '1423770368_87ace6aa6d218099d34029cf843fcadc.jpg', 0, 11),
-(58, '1423770368_9b0cbcc0ed5ff131807aea1b790882be.jpg', 0, 11),
-(59, '1423770368_b524ee0f3a548c17e0b54b37c450fbde.jpg', 0, 11),
-(60, '1424498449_2191f3fe0857e9e9c8dbb186e3b17c97.jpg', 0, 16),
-(61, '1424498469_81c3020779346224d0fe264163dc0f2a.jpg', 0, 16),
-(62, '1424498480_10528c7d14776858078602c307ca210f.jpg', 0, 16),
-(63, '1424498490_a7674dcd80f84998b1852efbefba7df2.jpg', 0, 16),
-(171, '1427465226_75d69f08d22f84c54d50a0c064a01828.JPG', 0, 19),
-(172, '1427465226_69f4b57ea68c1887903fcfa82d2a2271.JPG', 0, 19),
-(173, '1427465226_a3b99d4cb16b2f2413d0b82df1e15459.JPG', 0, 19),
-(174, '1427465226_6fba1c39bd01354438fcdfdc2007f025.JPG', 0, 19),
-(177, '1427465226_6e4ff53aa30329ffb559918c43eb5bf4.jpg', 0, 19),
-(178, '1427465226_ca70e23c89013437c645e332176a55ae.JPG', 0, 19),
-(179, '1427709989_944589ed9647517414070af93c102670.png', 0, 23),
-(180, '1427709989_9f39515f195f59ce74f652ccf348e1a2.png', 0, 23),
-(181, '1427709989_87594a0208c8427b05d838c88cea6c3f.png', 0, 23),
-(182, '1427709989_00bf13f3eb5197266fe0f3c463e1925d.png', 0, 23),
-(183, '1427709989_814e7e9ba924caf747f87f8d874a2e96.png', 0, 23),
-(184, '1427710407_f8deed631db7c86151618c5b77a20b7a.png', 0, 24),
-(185, '1427710407_8e3e4648c5b5022cbd3f8e2b50a8c186.jpg', 0, 24),
-(186, '1427710407_01806ea08c2ce03df2aba26c8f67e566.png', 0, 24),
-(187, '1427710407_cf8f3b9ff0684a2a19207c9b65c423b9.jpg', 0, 24),
-(188, '1427712417_862a46aef6af47c581a7fe0233cea3b6.jpg', 0, 26),
-(189, '1427712417_fb39728a68ee0d1b4f511d2b471ffe08.jpg', 0, 26),
-(190, '1427712417_a520af702541a70bccda221ed20fa445.png', 0, 26);
+INSERT INTO `goods_images` (`id`, `name`, `image`, `order`, `good_id`) VALUES
+(50, '', '1420715108_33a3e9448b41955773178aeca5623c8c.jpg', 0, 15),
+(55, '', '1423770358_891d585b516186324eedec5ea32ffd70.png', 0, 11),
+(56, '', '1423770368_547f98384d7ec77fd0b2bea1ca6c1390.jpg', 0, 11),
+(57, '', '1423770368_87ace6aa6d218099d34029cf843fcadc.jpg', 0, 11),
+(58, '', '1423770368_9b0cbcc0ed5ff131807aea1b790882be.jpg', 0, 11),
+(59, '', '1423770368_b524ee0f3a548c17e0b54b37c450fbde.jpg', 0, 11),
+(60, '', '1424498449_2191f3fe0857e9e9c8dbb186e3b17c97.jpg', 0, 16),
+(61, '', '1424498469_81c3020779346224d0fe264163dc0f2a.jpg', 0, 16),
+(62, '', '1424498480_10528c7d14776858078602c307ca210f.jpg', 0, 16),
+(63, '', '1424498490_a7674dcd80f84998b1852efbefba7df2.jpg', 0, 16),
+(171, '', '1427465226_75d69f08d22f84c54d50a0c064a01828.JPG', 0, 19),
+(172, '', '1427465226_69f4b57ea68c1887903fcfa82d2a2271.JPG', 0, 19),
+(173, '', '1427465226_a3b99d4cb16b2f2413d0b82df1e15459.JPG', 0, 19),
+(174, '', '1427465226_6fba1c39bd01354438fcdfdc2007f025.JPG', 0, 19),
+(177, '', '1427465226_6e4ff53aa30329ffb559918c43eb5bf4.jpg', 0, 19),
+(178, '', '1427465226_ca70e23c89013437c645e332176a55ae.JPG', 0, 19),
+(179, 'MacBook', '1427709989_944589ed9647517414070af93c102670.png', 0, 23),
+(180, 'MacBook Pro                                                                ', '1427709989_9f39515f195f59ce74f652ccf348e1a2.png', 0, 23),
+(181, 'MacBook Ploskiy', '1427709989_87594a0208c8427b05d838c88cea6c3f.png', 0, 23),
+(183, 'MacBook Easy                        ', '1427709989_814e7e9ba924caf747f87f8d874a2e96.png', 0, 23),
+(184, '', '1427710407_f8deed631db7c86151618c5b77a20b7a.png', 0, 24),
+(185, '', '1427710407_8e3e4648c5b5022cbd3f8e2b50a8c186.jpg', 0, 24),
+(186, '', '1427710407_01806ea08c2ce03df2aba26c8f67e566.png', 0, 24),
+(187, '', '1427710407_cf8f3b9ff0684a2a19207c9b65c423b9.jpg', 0, 24),
+(188, '', '1427712417_862a46aef6af47c581a7fe0233cea3b6.jpg', 0, 26),
+(189, '', '1427712417_fb39728a68ee0d1b4f511d2b471ffe08.jpg', 0, 26),
+(190, '', '1427712417_a520af702541a70bccda221ed20fa445.png', 0, 26),
+(191, '', '1428316092_e5e4805ef2c4c5c0c77939eb92fb477c.jpg', 0, 23);
 
 -- --------------------------------------------------------
 
@@ -440,10 +443,10 @@ INSERT INTO `good_attr_value` (`good_id`, `attr_id`, `value`) VALUES
 (20, 9, 'dfgdfg'),
 (20, 10, 'dfgdfg'),
 (20, 11, 'dfgdfg'),
+(26, 7, ''),
 (23, 9, 'OS X Yosemite'),
 (23, 10, 'Intel Core i7'),
-(23, 11, '125 Гц'),
-(26, 7, '');
+(23, 11, '125 Гц');
 
 -- --------------------------------------------------------
 
@@ -848,7 +851,7 @@ CREATE TABLE IF NOT EXISTS `subcategories_images` (
   `order` int(11) NOT NULL,
   `subcategory_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Дамп данных таблицы `subcategories_images`
@@ -856,7 +859,8 @@ CREATE TABLE IF NOT EXISTS `subcategories_images` (
 
 INSERT INTO `subcategories_images` (`id`, `image`, `order`, `subcategory_id`) VALUES
 (1, '1427776786_f086a4426abf95fed4e7ae933c127c21.png', 0, 65),
-(2, '1427776786_ec26b579e3186f0e6874acb5fb42260e.png', 0, 65);
+(2, '1427776786_ec26b579e3186f0e6874acb5fb42260e.png', 0, 65),
+(3, '1428320778_6204cadca28b8447ac0e2203df4acce3.jpg', 0, 61);
 
 -- --------------------------------------------------------
 
