@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 06 2015 г., 15:00
+-- Время создания: Апр 07 2015 г., 11:04
 -- Версия сервера: 5.5.41-log
 -- Версия PHP: 5.4.35
 
@@ -21,6 +21,62 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `istore` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `istore`;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `accessors`
+--
+
+DROP TABLE IF EXISTS `accessors`;
+CREATE TABLE IF NOT EXISTS `accessors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT 'required',
+  `url` varchar(255) NOT NULL COMMENT 'required',
+  `price` varchar(255) NOT NULL COMMENT 'required',
+  `category_id` int(11) NOT NULL,
+  `imageBg` varchar(255) NOT NULL COMMENT 'required',
+  `imageSm` varchar(255) NOT NULL,
+  `text` text NOT NULL,
+  `order` int(11) NOT NULL COMMENT 'not required',
+  `active` varchar(2) NOT NULL COMMENT 'not required',
+  `metatitle` varchar(255) NOT NULL COMMENT 'not required',
+  `desc` text NOT NULL COMMENT 'not required',
+  `keyw` text NOT NULL COMMENT 'not required',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `url` (`url`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Дамп данных таблицы `accessors`
+--
+
+INSERT INTO `accessors` (`id`, `name`, `url`, `price`, `category_id`, `imageBg`, `imageSm`, `text`, `order`, `active`, `metatitle`, `desc`, `keyw`) VALUES
+(1, 'Sample accessors', 'sample-accessors', '125', 0, 'f1342c6ca36c8854b8486a80154b89cd.jpg', 'b19fbaf58c75153cb54f51606da1e243.jpg', '<p>This is really a simple accessor!</p>\r\n\r\n<p>Enjoy it!</p>\r\n', 0, 'on', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `accessors_images`
+--
+
+DROP TABLE IF EXISTS `accessors_images`;
+CREATE TABLE IF NOT EXISTS `accessors_images` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `order` int(11) NOT NULL,
+  `accessor_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+--
+-- Дамп данных таблицы `accessors_images`
+--
+
+INSERT INTO `accessors_images` (`id`, `name`, `image`, `order`, `accessor_id`) VALUES
+(7, '', '1428387427_0180a1c51fc9204bd9fd13de13fe173d.png', 0, 1),
+(8, '', '1428387427_26497bc9cd69269d9beb0ea850d07596.jpg', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -248,6 +304,59 @@ INSERT INTO `categories` (`id`, `name`, `image`, `order`, `active`, `url`, `text
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `categories_accessors`
+--
+
+DROP TABLE IF EXISTS `categories_accessors`;
+CREATE TABLE IF NOT EXISTS `categories_accessors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `order` int(11) NOT NULL,
+  `active` varchar(2) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `text` text NOT NULL,
+  `metatitle` varchar(255) NOT NULL,
+  `desc` varchar(255) NOT NULL,
+  `keyw` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `url` (`url`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Дамп данных таблицы `categories_accessors`
+--
+
+INSERT INTO `categories_accessors` (`id`, `name`, `image`, `order`, `active`, `url`, `text`, `metatitle`, `desc`, `keyw`) VALUES
+(1, 'Наушники', 'bd70f827774305efac9d75e9f7bb359c.jpg', 0, 'on', 'naushniki', '', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `categories_accessors_images`
+--
+
+DROP TABLE IF EXISTS `categories_accessors_images`;
+CREATE TABLE IF NOT EXISTS `categories_accessors_images` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `image` varchar(255) NOT NULL,
+  `order` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Дамп данных таблицы `categories_accessors_images`
+--
+
+INSERT INTO `categories_accessors_images` (`id`, `image`, `order`, `category_id`) VALUES
+(1, '1428392466_ac64eb5af73b67582fda841ab4191438.png', 0, 1),
+(2, '1428392466_07ee1c5ea7193fe411eddafdb6c8d5b3.png', 0, 1),
+(3, '1428392466_f38f1181e4fb24055292f62b1834eb2c.jpg', 0, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `contacts`
 --
 
@@ -377,7 +486,7 @@ CREATE TABLE IF NOT EXISTS `goods_images` (
   `order` int(11) NOT NULL,
   `good_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=192 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=191 ;
 
 --
 -- Дамп данных таблицы `goods_images`
@@ -400,9 +509,9 @@ INSERT INTO `goods_images` (`id`, `name`, `image`, `order`, `good_id`) VALUES
 (174, '', '1427465226_6fba1c39bd01354438fcdfdc2007f025.JPG', 0, 19),
 (177, '', '1427465226_6e4ff53aa30329ffb559918c43eb5bf4.jpg', 0, 19),
 (178, '', '1427465226_ca70e23c89013437c645e332176a55ae.JPG', 0, 19),
-(179, 'MacBook', '1427709989_944589ed9647517414070af93c102670.png', 0, 23),
+(179, 'MacBook epta                           ', '1427709989_944589ed9647517414070af93c102670.png', 0, 23),
 (180, 'MacBook Pro                                                                ', '1427709989_9f39515f195f59ce74f652ccf348e1a2.png', 0, 23),
-(181, 'MacBook Ploskiy', '1427709989_87594a0208c8427b05d838c88cea6c3f.png', 0, 23),
+(181, '0', '1427709989_87594a0208c8427b05d838c88cea6c3f.png', 0, 23),
 (183, 'MacBook Easy                        ', '1427709989_814e7e9ba924caf747f87f8d874a2e96.png', 0, 23),
 (184, '', '1427710407_f8deed631db7c86151618c5b77a20b7a.png', 0, 24),
 (185, '', '1427710407_8e3e4648c5b5022cbd3f8e2b50a8c186.jpg', 0, 24),
@@ -410,8 +519,7 @@ INSERT INTO `goods_images` (`id`, `name`, `image`, `order`, `good_id`) VALUES
 (187, '', '1427710407_cf8f3b9ff0684a2a19207c9b65c423b9.jpg', 0, 24),
 (188, '', '1427712417_862a46aef6af47c581a7fe0233cea3b6.jpg', 0, 26),
 (189, '', '1427712417_fb39728a68ee0d1b4f511d2b471ffe08.jpg', 0, 26),
-(190, '', '1427712417_a520af702541a70bccda221ed20fa445.png', 0, 26),
-(191, '', '1428316092_e5e4805ef2c4c5c0c77939eb92fb477c.jpg', 0, 23);
+(190, '', '1427712417_a520af702541a70bccda221ed20fa445.png', 0, 26);
 
 -- --------------------------------------------------------
 
@@ -851,7 +959,7 @@ CREATE TABLE IF NOT EXISTS `subcategories_images` (
   `order` int(11) NOT NULL,
   `subcategory_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Дамп данных таблицы `subcategories_images`
@@ -860,7 +968,9 @@ CREATE TABLE IF NOT EXISTS `subcategories_images` (
 INSERT INTO `subcategories_images` (`id`, `image`, `order`, `subcategory_id`) VALUES
 (1, '1427776786_f086a4426abf95fed4e7ae933c127c21.png', 0, 65),
 (2, '1427776786_ec26b579e3186f0e6874acb5fb42260e.png', 0, 65),
-(3, '1428320778_6204cadca28b8447ac0e2203df4acce3.jpg', 0, 61);
+(4, '1428385337_230697b06f9417e1d4e183ec279212da.png', 0, 61),
+(6, '1428385337_d8de95934780f06268f2bd6d52a947c4.png', 0, 61),
+(7, '1428385409_348f20525af7a1a3705af61d131d2f29.png', 0, 61);
 
 -- --------------------------------------------------------
 

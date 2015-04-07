@@ -1,4 +1,3 @@
-<?//php var_dump($images);?>
 <?php if(!empty($entries)):?>
    <!-- slider -->
    <div class="slider about_iMac_slider">
@@ -11,7 +10,7 @@
                <div class="carousel-inner" role="listbox">
 
                   <div class="item<?php if($key==0):?> active<?php endif;?>">
-                     <img src="/images/subcategories/<?=$image['image']?>">
+                     <img src="/images/categories_accessors/<?=$image['image']?>">
                   </div><!-- item end -->
 
                </div>
@@ -42,16 +41,16 @@
       <div class="container">
          <!-- row -->
          <div class="row">
-            <?php foreach($entries as $entry):?>
+            <?php foreach($entries as $key=>$entry):?>
                <div class="col-md-<?=12/count($entries)?> col-xs-12 main_pagination_item main_pagination_item_<?=$key+1?>">
                   <div class="main_pagination_wrapper">
 
                      <h5><?=$entry['name']?></h5>
-                     <a href="/<?=$catUrl?>/<?=$subCatUrl?>/<?=$entry['url']?>/" class="main_pagination_item_container">
-                        <img src="/images/goods/<?=$entry['imageSm']?>" alt="" title="">
+                     <a href="/accessors/<?=$catUrl?>/<?=$entry['url']?>/" class="main_pagination_item_container">
+                        <img src="/images/accessors/<?=$entry['imageSm']?>" alt="" title="">
                      </a>
-                     <h4><a href="/<?=$catUrl?>/<?=$subCatUrl?>/<?=$entry['url']?>/"><?=$entry['subcategory_name']?></a></h4>
-                     <a href="/<?=$catUrl?>/<?=$subCatUrl?>/<?=$entry['url']?>/" class="link">Подробнее...</a>
+                     <h4><a href="/accessors/<?=$catUrl?>/<?=$entry['url']?>/"><?=$entry['category_name']?></a></h4>
+                     <a href="/accessors/<?=$catUrl?>/<?=$entry['url']?>/" class="link">Подробнее...</a>
 
                   </div>
                </div>

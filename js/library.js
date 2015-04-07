@@ -23,7 +23,7 @@ function image_del_click_subscription(module) {
 
     
 
-    $('.image_view').colorbox({
+    /*$('.image_view').colorbox({
         rel: 'gal',
         current: "Фото {current} из {total}",
         previous: 'Пред.',
@@ -41,7 +41,7 @@ function image_del_click_subscription(module) {
         width: "800",
         height: "600",
         close: "Закрыть"
-    });
+    });*/
 }
 
 jQuery.br2nl = function (varTest) {
@@ -86,33 +86,6 @@ jQuery(document).ready(function () {
     });
 
     image_del_click_subscription();
-    $('.good_edit').click(function () {
-        console.log("dfjsjfksjdf");
-        if (!$(this).parent().parent().find('.good_name').find('input').val()) {
-            var good_name = $(this).parent().parent().find('.good_name').text();
-            var name = "<input type='text' class='form-control' value='" + good_name + "' placeholder='Название'>";
-            $(this).parent().parent().find('.good_name').html(name);
-        }
-    });
-    $('.good_save').click(function () {
-        console.log("dasidsasi");
-        var good_name = $(this).parent().parent().find('.good_name input').val();
-        console.log(good_name);
-        $.ajax({
-            url: '/admin/goods/good_data_save',
-            type: 'POST',
-            data: {
-                good_id: $(this).parent().parent().parent().find('.image_del').attr('id'),
-                good_name: good_name
-            },
-            error: function () {
-                alert("Ошибка!");
-            },
-            success: function (data) {
-                console.log(data);
-            }
-        });
-        $(this).parent().parent().find('.good_name').html(good_name);
-    });
+    
 
 });

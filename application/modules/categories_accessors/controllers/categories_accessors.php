@@ -1,14 +1,14 @@
 <?php
 
-class Subcategories extends MX_Controller {
+class Categories_accessors extends MX_Controller {
 
-    private $module = 'subcategories';
-    private $module_name = 'Подкатегории товаров';
+    private $module = 'categories_accessors';
+    private $module_name = 'Категории товаров';
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('subcategories_model');
-        $this->model = $this->subcategories_model;
+        $this->load->model('categories_accessors_model');
+        $this->model = $this->categories_accessors_model;
     }
 
     public function index() {
@@ -24,7 +24,6 @@ class Subcategories extends MX_Controller {
     public function view($for_front = false, $url = false) {
         $data['module_name'] = $this->module_name;
         $data['module'] = $this->module;
-        var_dump("lol");
         if (!$for_front) {
             if ($url) {
                 $data['entries'] = $this->model->get_by_url($url);
@@ -33,8 +32,6 @@ class Subcategories extends MX_Controller {
                 $this->load->view($this->module, $data);
             }
         } else {
-            foreach($data['entries'] as &$entry)
-                $entry['category_url'] = $this->model->getByCatId($entry['category_id']);
             if ($url) {
                 $data['entries'] = $this->model->get_by_url($url);
                 $this->load->view('front/new', $data);
@@ -62,15 +59,6 @@ class Subcategories extends MX_Controller {
         }
     }
 
-    public function getByCatUrl($url) {
-        $id = $this->model->getCatIdByUrl($url);
-        return $this->model->getByCatId($id['id']);
-    }
-
-    public function getByCatId($id) {
-        return $this->model->getByCatId($id);
-    }
-
     public function get_by_url($url, $for_front = true) {
         return $this->model->get_by_url($url, $for_front);
     }
@@ -85,7 +73,6 @@ class Subcategories extends MX_Controller {
         $data['tags'] = $tags;
         $data['module_name'] = $this->module_name;
         $data['module'] = $this->module;
-        $data['categories'] = Modules::run('categories/get');
         if ($this->input->post('do') == $this->module . 'Edit') {
             $this->form_validation->set_rules('text', '', 'trim|xss_clean');
             $this->form_validation->set_rules('url', '', 'trim|xss_clean');
@@ -157,7 +144,6 @@ class Subcategories extends MX_Controller {
         $data['title'] = 'Административная панель';
         $data['module_name'] = $this->module_name;
         $data['module'] = $this->module;
-        $data['categories'] = Modules::run('categories/get');
         if ($this->input->post('do') == $this->module . 'Add') {
             $this->form_validation->set_rules('text', '', 'trim|xss_clean');
             $this->form_validation->set_rules('url', '', 'trim|xss_clean');
@@ -223,12 +209,6 @@ class Subcategories extends MX_Controller {
 
     public function down($id) {
         $this->model->order($id, 'down');
-    }
-
-    public function getCatNameById($id)
-    {
-        $result = $this->module->getByCatId($id);
-        return $result['text'];
     }
 
     public function images_upload($hotel_id) {
@@ -317,5 +297,6 @@ class Subcategories extends MX_Controller {
             die('Такой картинки не существует!');
         }
     }
+
 
 }

@@ -71,6 +71,13 @@
 </div>
 <div class="row">
     <div class="col-md-12">
+        <label for="text">Картинки</label>
+        <div class="alert alert-info" role="alert">
+            <div id="upload_image"></div>
+        </div>
+        <div class="images_group"></div>
+    </div>
+    <div class="col-md-12">
         <div class="form-group">
             <label for="text">Информация о категории</label>
             <textarea name="text" id="text" rows="30">
@@ -92,11 +99,45 @@
 
 <script>
     $(function(){
+        var url = '/admin/' + '<?= $module ?>' + '/images_upload/' + '<?= $entry['id'] ?>';
+        $("#upload_image").imageUpload(url, {
+            uploadButtonText: "Добавить",
+            previewImageSize: 150,
+            onSuccess: function (response) {
+                $.ajax(
+                        {
+                            url: '/admin/<?= $module ?>/get_images/' + '<?= $entry['id'] ?>',
+                            type: 'POST',
+                            data: {
+                            },
+                            error: function () {
+                                console.log('Ошибка');
+                            },
+                            success: function (data) {
+                                $('.images_group').html(data);
+                                image_del_click_subscription('<?= $module ?>');
+                            }
+                        });
+            }
+        });
+        $.ajax({
+            url: '/admin/<?= $module ?>/get_images/' + '<?= $entry['id'] ?>',
+            type: 'POST',
+            data: {
+            },
+            error: function () {
+                console.log('Ошибка');
+            },
+            success: function (data) {
+                $('.images_group').html(data)
+                image_del_click_subscription('<?= $module ?>');
+            }
+        });
         $("#hideMeta").toggle(function(){
             $("#meta").hide();
         },
         function(){
             $("#meta").show();
         });
-    });
+    })
 </script>

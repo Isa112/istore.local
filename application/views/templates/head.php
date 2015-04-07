@@ -1,5 +1,5 @@
-<?php $categories = Modules::run('categories/get');?>
-
+<?php $categories = Modules::run('categories/get',null,true);?>
+<?php $category_accessors = Modules::run('categories_accessors/get',null,true);?>
 <!-- header -->
 <header class="navbar navbar-default navbar-fixed-top" role="navigation">
    <!-- container -->
@@ -44,32 +44,23 @@
                </li>
                <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-delay="100">Аксессуары<b class="caret"></b></a>
+                    <?php if($category_accessors):?>
                      <ul class="dropdown-menu">
+                      <?php foreach($category_accessors as $category):?>
+                        <?php $accessors = Modules::run('accessors/getByCatUrl',$category['url'])?>
                         <li>
-                           <a class="trigger">Level 1</a>
+                           <a class="trigger" href="/accessors/<?=$category['url']?>"><?=$category['name']?></a>
+                           <?php if($accessors):?>
                            <ul class="dropdown-menu sub-menu">
-                              <li><a href="#">Level 2</a></li>
-                              <li><a href="#">Level 2</a></li>
-                              <li><a href="#">Level 2</a></li>
+                              <?php foreach($accessors as $accessor):?>
+                                <li><a href="/accessors/<?=$category['url']?>/<?=$accessor['url']?>"><?=$accessor['url']?></a></li>
+                              <?php endforeach;?>
                            </ul>
+                         <?php endif;?>
                         </li>
-                        <li>
-                           <a class="trigger">Level 1</a>
-                           <ul class="dropdown-menu sub-menu">
-                              <li><a href="#">Level 2</a></li>
-                              <li><a href="#">Level 2</a></li>
-                              <li><a href="#">Level 2</a></li>
-                           </ul>
-                        </li>
-                        <li>
-                           <a class="trigger">Level 1</a>
-                           <ul class="dropdown-menu sub-menu">
-                              <li><a href="#">Level 2</a></li>
-                              <li><a href="#">Level 2</a></li>
-                              <li><a href="#">Level 2</a></li>
-                           </ul>
-                        </li>
+                      <?php endforeach;?>
                      </ul>
+                    <?php endif;?>
                </li>
                     <li><a href="/news/">Статьи</a></li>
                     <li><a href="/contacts/">Контакты</a></li>

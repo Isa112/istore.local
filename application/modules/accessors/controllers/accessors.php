@@ -1,14 +1,14 @@
 <?php
 
-class Goods extends MX_Controller {
+class Accessors extends MX_Controller {
 
-    private $module = 'goods';
-    private $module_name = 'Товары';
+    private $module = 'accessors';
+    private $module_name = 'Аксессуары';
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('goods_model');
-        $this->model = $this->goods_model;
+        $this->load->model('accessors_model');
+        $this->model = $this->accessors_model;
     }
 
     public function index() {
@@ -21,17 +21,40 @@ class Goods extends MX_Controller {
         }
     }
 
-    public function view($for_front = false, $url = false,$subcategory_id) {
+    /*public function view($for_front = false, $url = false) {
         $data['module_name'] = $this->module_name;
         $data['module'] = $this->module;
         if (!$for_front) {
             if (!$url) {
-                $data['entries'] = $this->model->get(false,false,$subcategory_id);
-                $data['subcategories'] = Modules::run('subcategories/get');
+                $data['entries'] = $this->model->get(false,false);
+                //var_dump($data['subcategories']);die;
+                $this->load->view($this->module, $data);
+            } else {
+                $data['entry'] = $this->model->get_by_url($url);
+                $this->load->view('front/tour', $data);
+            }
+        } else {
+            if (!$url) {
+                $data['entries'] = $this->model->get('', true);
+                $this->load->view('front/' . $this->module, $data);
+            } else {
+                //$data['entry'] = $this->model->get_by_url($url);
+                $this->load->view('front/tour', $data);
+            }
+        }
+    }*/
+
+    public function view($for_front = false, $url = false,$category_id=null) {
+        $data['module_name'] = $this->module_name;
+        $data['module'] = $this->module;
+        if (!$for_front) {
+            if (!$url) {
+                $data['entries'] = $this->model->get(false,false,$category_id);
+                $data['categories'] = Modules::run('categories_accessors/get');
                 //var_dump($data['subcategories']);die;
                 foreach($data['entries'] as &$entry)
                 {
-                    $entry['subcategory_name'] = $this->getSubCatNameById($entry['subcategory_id']);
+                    $entry['category_name'] = $this->getSubCatNameById($entry['category_id']);
                 }
                 $this->load->view($this->module, $data);
             } else {
@@ -224,7 +247,7 @@ class Goods extends MX_Controller {
                     $this->session->set_userdata($arr);
                     redirect('admin/' . $this->module . '/edit/' . $entry['id']);
                 } 
-                if(file_exists('images/',$this->module . '/' . $entry['imageSm']))
+                if(file_exists('images/'.$this->module . '/' . $entry['imageSm']))
                 {
                     unlink('images/' . $this->mosule . '/' . $entry['imageSm']);
                     $this->model->update($id,$data['entry']['subcategory_id'], $image1_data['file_name'],$image2_data['file_name']);
@@ -264,8 +287,6 @@ class Goods extends MX_Controller {
     public function add() {
         $data['module_name'] = $this->module_name;
         $data['module'] = $this->module;
-        $hotels = Modules::run('hotels/get', '', true);
-        $data['hotels'] = $hotels;
         if ($this->input->post('do') == $this->module . 'Add') {
             $this->form_validation->set_rules('name', 'Название', 'trim|required|xss_clean');
             $this->form_validation->set_rules('url', 'ЧПУ', 'trim|required|xss_clean');
@@ -367,7 +388,7 @@ class Goods extends MX_Controller {
         }
     }
 
-    public function get_images($id, $front = false) {
+    /*public function get_images($id, $front = false) {
         if ($front) {
             return $this->model->get_images($id);
         } else {
@@ -419,7 +440,7 @@ class Goods extends MX_Controller {
                                         var good_name = $(this).parent().parent().find('.good_name input').val();
                                         console.log(good_name);
                                         $.ajax({
-                                            url: '/admin/goods/good_data_save',
+                                            url: '/admin/accessors/good_data_save',
                                             type: 'POST',
                                             data: {
                                                 good_id: $(this).parent().parent().parent().find('.image_del').attr('id'),
@@ -436,6 +457,61 @@ class Goods extends MX_Controller {
                                     });
                                 </script>
                             </div>
+                        </p>
+                    </div>
+                    <?php if ($k % 6 == 0): ?>
+                        <div class="clear"></div>
+                    <?php endif; ?>
+                    <?php
+                endforeach;
+                ?>
+            </div>
+            <?php
+        }
+    }*/
+
+    public function get($id = null, $for_front = false) {
+        if ($id) {
+            if ($for_front) {
+                return $this->model->get($id, true);
+            } else {
+                return $this->model->get($id);
+            }
+        } else {
+            if ($for_front) {
+                return $this->model->get('', true);
+            } else {
+                return $this->model->get();
+            }
+        }
+    }
+
+    public function get_images($id, $front = false) {
+        if ($front) {
+            return $this->model->get_images($id);
+
+        } else {
+            /*var_dump('pimages');die;*/
+            $pimages = $this->model->get_images($id);
+
+            if (!$pimages) {
+                echo '<div class="alert alert-danger" role="alert">Миниатюр не найдено!</div>';
+            }
+            ?>
+            <div class="row images">
+                <?php
+                foreach ($pimages as $k => $pimage):
+                    $k++;
+                    ?>
+                    <div id="image_<?= $pimage['id'] ?>" style="" class="col-xs-4 col-md-2">
+                        <p class="thumbnail" style="width:100%;height:100%;">
+                            <button id="<?= $pimage['id'] ?>" type="button" class="close image_del">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <a class="image_view" style="width:100%;height:100%;" href="/images/<?= $this->module . '/' . $pimage['image'] ?>">
+                                <img class="img-rounded" style="width:100%;height:100%;" src="/images/<?= $this->module . '/' . $pimage['image'] ?>" alt="...">
+                            </a>
                         </p>
                     </div>
                     <?php if ($k % 6 == 0): ?>
@@ -476,8 +552,9 @@ class Goods extends MX_Controller {
         $this->model->order($id, 'down');
     }
 
-    public function getCategoriesAjax()
+    public function getCategories()
     {
+        //var_dump('sdfjsjfjsdf');
         echo json_encode($this->model->getCategories());   
     }
 
@@ -499,12 +576,11 @@ class Goods extends MX_Controller {
         return $this->model->getSubCatNameById($id);
     }
 
-    public function getBySubCatUrl($url)
+    public function getByCatUrl($url)
     {
-        //var_dump($url);
         if ($url) 
         {
-            return $this->model->getBySubCatUrl($url);
+            return $this->model->getByCatUrl($url);
         }
         else
             return false;

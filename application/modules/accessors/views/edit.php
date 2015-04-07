@@ -1,118 +1,32 @@
 <script type="text/javascript">
 
 
-    function getAttr(id, attrs)
-    {
-        $.ajax({
-            type: "POST",
-            url: "/getAttrAjax/",
-            data: 'id=' + id,
-            success: function (data) {
-                console.log("it's attr: " + data);
-                $elem = $('#attr');
-                var attr = $.parseJSON(data);
-                $elem.empty();
-                if (id == $('#category').attr('current'))
-                    for (i = 0; i < attr.length; i++)
-                    {
-
-                        $elem.append(
-                                "<div class='form-group'>" +
-                                "<label for=attr'" + attr[i].id + "'>" + attr[i].name + "</lable>" +
-                                "<input type='text' class='form-control' name='attr[" + attr[i].id + "]' id='attr'" + attr[i].id + "' value = " + attrs[i] + ">" +
-                                "</div>"
-                                );
-                    }
-                else
-                    for (i = 0; i < attr.length; i++)
-                    {
-
-                        $elem.append(
-                                "<div class='form-group'>" +
-                                "<label for=attr'" + attr[i].id + "'>" + attr[i].name + "</lable>" +
-                                "<input type='text' class='form-control' name='attr[" + attr[i].id + "]' id='attr'" + attr[i].id + "'>" +
-                                "</div>"
-                                );
-                    }
-            }
-        })
-    }
-
     function getCategories()
-    {
-        $.ajax({
-            type: "POST",
-            url: "/getCategoriesAjax/",
-            success: function (data)
-            {
-                var categories = $.parseJSON(data);
-                var $select = $('#category');
-                console.log(categories);
-                for (i = 0; i < categories.length; i++)
-                    if (categories[i].id ==<?= $entry['subcategory_id'] ?>)
-                        $select.append("<option selected value='" + categories[i].id + "'>" + categories[i].text + "</option>");
-                    else
-                        $select.append("<option value='" + categories[i].id + "'>" + categories[i].text + "</option>");
-            }
-        })
-    }
-
-    function getSubCategories()
-    {
-        $.ajax({
-            type: "POST",
-            url: "/getSubCategoriesAjax/",
-            success: function (data)
-            {
-                var subCategories = $.parseJSON(data);
-                var $select = $('#category');
-                console.log(subCategories);
-                for (i = 0; i < subCategories.length; i++)
-                    if (subCategories[i].id == <?= $entry['subcategory_id'] ?>)
-                    {
-                        $select.append("<option selected category='" + subCategories[i].category_id + "' value='" + subCategories[i].id + "'>" + subCategories[i].text + "</option>");
-                        $select.attr('current', subCategories[i].category_id);
-                    }
-                    else
-                        $select.append("<option category='" + subCategories[i].category_id + "' value='" + subCategories[i].id + "'>" + subCategories[i].text + "</option>");
-            }
-        })
-    }
+        {
+            $.ajax({
+                type : "POST",
+                url  : "/getCategoriesAccessorsAjax/",
+                success : function(data)
+                {
+                    //console.log(data);
+                    var categories = $.parseJSON(data);
+                    var $select = $('#category');
+                    
+                    for(i=0;i<categories.length;i++)
+                        $select.append("<option value='"+categories[i].id+"'>"+categories[i].name+"</option>");
+                },
+                error : function(data,text)
+                {
+                    //var categories = $.parseJSON(data);
+                    var $select = $('#category');
+                    console.log(text);
+                    for(i=0;i<categories.length;i++)
+                        $select.append("<option value='"+categories[i].id+"'>"+categories[i].text+"</option>");
+                }
+            })
+        }
 
     $(function () {
-        $('#save').click(function(){
-            alert('lol');
-        })
-        $('.good_edit').click(function () {
-            console.log("dfjsjfksjdf");
-            if (!$(this).parent().parent().find('.good_name').find('input').val()) {
-                var good_name = $(this).parent().parent().find('.good_name').text();
-                var name = "<input type='text' class='form-control' value='" + good_name + "' placeholder='Название'>";
-                $(this).parent().parent().find('.good_name').html(name);
-            }
-        });
-        $('.good_save').click(function () {
-            console.log("dasidsasi");
-            var good_name = $(this).parent().parent().find('.good_name input').val();
-            console.log(good_name);
-            $.ajax({
-                url: '/admin/goods/good_data_save',
-                type: 'POST',
-                data: {
-                    good_id: $(this).parent().parent().parent().find('.image_del').attr('id'),
-                    good_name: good_name
-                },
-                error: function () {
-                    alert("Ошибка!");
-                },
-                success: function (data) {
-                    console.log(data);
-                }
-            });
-            $(this).parent().parent().find('.good_name').html(good_name);
-        });
-
-
         var url = '/admin/' + '<?= $module ?>' + '/images_upload/' + '<?= $entry['id'] ?>';
         $("#upload_image").imageUpload(url, {
             uploadButtonText: "Добавить",
@@ -143,18 +57,10 @@
                 console.log('Ошибка');
             },
             success: function (data) {
-                $('.images_group').html(data);
+                $('.images_group').html(data)
                 image_del_click_subscription('<?= $module ?>');
             }
         });
-
-
-        var attrs = new Array();
-        <?php foreach ($attrs as $attr): ?>
-            attrs.push("<?= $attr['value'] ?>");
-        <?php endforeach; ?>
-        console.log("subcategory id: " + "<?= $entry['subcategory_id'] ?>");
-        getSubCategories();
         $("#category").bind({
             blur: function ()
             {
@@ -255,8 +161,8 @@
         <input name='url' value="<?= $entry['url'] ?>" type="text" class="form-control" id="url" placeholder="">
     </div>
     <div class="form-group">
-        <label for="category">Выберите подкатегорию</label>
-        <select class="form-control" id="category" name="subcategory"></select>
+        <label for="category">Выберите категорию</label>
+        <select class="form-control" id="category" name="category"></select>
     </div>
     <div class="form-group">
         <label for="title">Цена</label>

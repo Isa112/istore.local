@@ -39,7 +39,7 @@
         <div class="form-group">
             <select name="category" class="form-control" id="category">
                 <?foreach($categories as $category):?>
-                    <option <?if($category['id'] == $entry['category_id']):?>selected<?endif;?> value='<?=$category['id']?>'><?=$category['text']?></option>
+                    <option <?if($category['id'] == $entry['category_id']):?>selected<?endif;?> value='<?=$category['id']?>'><?=$category['name']?></option>
                 <?endforeach;?>
             </select>
         </div>

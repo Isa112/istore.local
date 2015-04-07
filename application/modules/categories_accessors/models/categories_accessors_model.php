@@ -1,10 +1,10 @@
 <?php
 
-class Categories_model extends CI_Model {
+class Categories_accessors_model extends CI_Model {
 
-    private $table_name = 'categories';
-//    private $images_table = 'news_images';
-    private $redirect_url = 'categories';
+    private $table_name = 'categories_accessors';
+    private $images_table = 'categories_accessors_images';
+    private $redirect_url = 'categories_accessors';
 
     public function __construct() {
         $this->load->database();
@@ -138,6 +138,34 @@ class Categories_model extends CI_Model {
             $this->db->where('id', $id);
             $this->db->update($this->table_name, $data);
         }
+    }
+
+    public function images_insert($image, $id) {
+        $data = array(
+            'image' => $image,
+            'order' => 0,
+            'category_id' => $id
+        );
+
+        return $this->db->insert($this->images_table, $data);
+    }
+
+    public function get_images($id) {
+        $query = $this->db->get_where($this->images_table, array('category_id' => $id));
+        return $query->result_array();
+    }
+
+    public function delete_images($id) {
+        $this->db->delete($this->images_table, array('category_id' => $id));
+    }
+
+    public function get_image($id) {
+        $query = $this->db->get_where($this->images_table, array($this->primary_key => $id));
+        return $query->row_array();
+    }
+
+    public function delete_image($id) {
+        $this->db->delete($this->images_table, array($this->primary_key => $id));
     }
 
 }

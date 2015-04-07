@@ -77,11 +77,12 @@ $route['news'] = 'front/news';
 $route['news/(:any)'] = 'front/new/$1';
 
 $route['getCategoriesAjax'] = 'goods/getCategoriesAjax';
-$route['getSubCategoriesAjax'] = 'goods/getSubCategoriesAjax';
-$route['getAttrAjax']  = 'goods/getAttrAjax';
+$route['getCategoriesAccessorsAjax'] = 'accessors/getCategories';
 $route['news/(:any)'] = 'front/onenew/$1';
 $route['blog/(:any)'] = 'front/post/$1';
 $route['vises/(:any)'] = 'front/vises/$1';
+$route['accessors/(:any)/(:any)'] = 'front/accessor/$1/$2';
+$route['accessors/(:any)'] = 'front/accessors/$1';
 $route['(:any)/(:any)/(:any)'] = 'front/good/$1/$2/$3';
 $route['(:any)/(:any)'] = 'front/goods/$1/$2';
 $route['(:any)'] = 'front/subcategories/$1';

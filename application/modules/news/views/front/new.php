@@ -18,6 +18,7 @@
 	<article class="news">
 	   <div class="container">
 	      <div class="row">
+	      	 <h1><?=$entry['name']?></h1>
 	         <div class="col-md-12 col-xs-12">
 	            <?=$entry['text']?>
 	         </div>
