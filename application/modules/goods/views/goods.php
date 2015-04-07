@@ -5,7 +5,23 @@
             <td width="30px">#</td>
             <td width="30%">Название</td>
             <td width="30%">ЧПУ</td>
-            <td width="30%">Подкатегория</td>
+            <td width="30%">
+                <!-- <a href="/admin/goods/subcategory_id/asc">Подкатегория</a> -->
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default" onclick="location.href='/admin/goods/';">Подкатегории</button>
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <?php if(!empty($subcategories)):?>
+                    <ul class="dropdown-menu" role="menu">
+                      <?php foreach($subcategories as $subcategory):?>
+                        <li><a href="/admin/goods/subcategory/<?=$subcategory['id']?>"><?=$subcategory['text']?></a></li>
+                      <?php endforeach;?>
+                    </ul>
+                  <?php endif;?>
+                </div>
+            </td>
             <td>Миниатюра</td>
             <td>Активен</td>
             <td>Порядок</td>

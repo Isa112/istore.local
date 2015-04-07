@@ -3,8 +3,9 @@
 class Subcategories_model extends CI_Model {
 
     private $table_name = 'subcategories';
-//    private $images_table = 'news_images';
+    private $images_table = 'subcategories_images';
     private $redirect_url = 'subcategories';
+    private $primary_key = 'id';
 
     public function __construct() {
         $this->load->database();
@@ -161,6 +162,34 @@ class Subcategories_model extends CI_Model {
 
     public function getCatIdByUrl($url) {
         return Modules::run('categories/get_by_url',$url);
+    }
+
+    public function images_insert($image, $id) {
+        $data = array(
+            'image' => $image,
+            'order' => 0,
+            'subcategory_id' => $id
+        );
+
+        return $this->db->insert($this->images_table, $data);
+    }
+
+    public function get_images($id) {
+        $query = $this->db->get_where($this->images_table, array('subcategory_id' => $id));
+        return $query->result_array();
+    }
+
+    public function delete_images($id) {
+        $this->db->delete($this->images_table, array('subcategory_id' => $id));
+    }
+
+    public function get_image($id) {
+        $query = $this->db->get_where($this->images_table, array($this->primary_key => $id));
+        return $query->row_array();
+    }
+
+    public function delete_image($id) {
+        $this->db->delete($this->images_table, array($this->primary_key => $id));
     }
 
 }

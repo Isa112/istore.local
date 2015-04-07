@@ -47,6 +47,7 @@
 /*======= PANEL =======*/
 (function($) {
     $(document).ready(function() {
+        console.log("I'm work!");
         var $panel = $('#panel');
         if ($panel.length>0) {
             var $sticker = $panel.children('#panel-sticker');
@@ -70,6 +71,7 @@
                     $panel.remove();
                 });
         }
+        
     });
 })(jQuery);
 /*======= END OF PANEL =======*/

@@ -21,12 +21,14 @@ class Goods extends MX_Controller {
         }
     }
 
-    public function view($for_front = false, $url = false) {
+    public function view($for_front = false, $url = false,$subcategory_id) {
         $data['module_name'] = $this->module_name;
         $data['module'] = $this->module;
         if (!$for_front) {
             if (!$url) {
-                $data['entries'] = $this->model->get();
+                $data['entries'] = $this->model->get(false,false,$subcategory_id);
+                $data['subcategories'] = Modules::run('subcategories/get');
+                //var_dump($data['subcategories']);die;
                 foreach($data['entries'] as &$entry)
                 {
                     $entry['subcategory_name'] = $this->getSubCatNameById($entry['subcategory_id']);
@@ -44,15 +46,6 @@ class Goods extends MX_Controller {
                 //$data['entry'] = $this->model->get_by_url($url);
                 $this->load->view('front/tour', $data);
             }
-        }
-    }
-
-    public function buy($id) {
-        if ($this->input->post('do') == 'buy') {
-            $data['id'] = $id;
-            $this->load->view('front/buy_form', $data);
-        } else {
-            
         }
     }
 
@@ -366,8 +359,7 @@ class Goods extends MX_Controller {
                         } else {
                             $image = $namef;
                             $this->model->images_insert($image, $hotel_id);
-                            echo 'Файл "' . $_FILES['file']['name'][$k] . '" успешно загружен
-';
+                            echo 'Файл "' . $_FILES['file']['name'][$k] . '" успешно загружен';
                         }
                     }
                 }
@@ -390,7 +382,7 @@ class Goods extends MX_Controller {
                 foreach ($pimages as $k => $pimage):
                     $k++;
                     ?>
-                    <div id="image_<?= $pimage['id'] ?>" style="" class="col-xs-4 col-md-2">
+                    <div id="image_<?= $pimage['id'] ?>" style="" class="col-sm-6 col-sm-4">
                         <p class="thumbnail" style="width:100%;height:100%;">
                             <button id="<?= $pimage['id'] ?>" type="button" class="close image_del">
                                 <span aria-hidden="true">&times;</span>
@@ -399,6 +391,51 @@ class Goods extends MX_Controller {
                             <a class="image_view" style="width:100%;height:100%;" href="/images/<?= $this->module . '/' . $pimage['image'] ?>">
                                 <img class="img-rounded" style="width:100%;height:100%;" src="/images/<?= $this->module . '/' . $pimage['image'] ?>" alt="...">
                             </a>
+                            <div class="caption">
+                                <h3 class="good_name"><?php
+                                    if (!$pimage['name']) {
+                                        echo '<input type="text" class="form-control" placeholder="Название">';
+                                    } else {
+                                        echo $pimage['name'];
+                                    }
+                                    ?>
+                                </h3>
+                                <p>
+                                    <a href="javascript:" class="btn btn-primary good_save" role="button">Сохранить</a> 
+                                    <a href="javascript:" class="btn btn-default good_edit" role="button">Редактировать</a>
+                                </p>
+
+                                <script>
+                                    $('.good_edit').click(function () {
+                                        console.log("dfjsjfksjdf");
+                                        if (!$(this).parent().parent().find('.good_name').find('input').val()) {
+                                            var good_name = $(this).parent().parent().find('.good_name').text();
+                                            var name = "<input type='text' class='form-control' value='" + good_name + "' placeholder='Название'>";
+                                            $(this).parent().parent().find('.good_name').html(name);
+                                        }
+                                    });
+                                    $('.good_save').click(function () {
+                                        console.log("dasidsasi");
+                                        var good_name = $(this).parent().parent().find('.good_name input').val();
+                                        console.log(good_name);
+                                        $.ajax({
+                                            url: '/admin/goods/good_data_save',
+                                            type: 'POST',
+                                            data: {
+                                                good_id: $(this).parent().parent().parent().find('.image_del').attr('id'),
+                                                good_name: good_name
+                                            },
+                                            error: function () {
+                                                alert("Ошибка!");
+                                            },
+                                            success: function (data) {
+                                                console.log(data);
+                                            }
+                                        });
+                                        $(this).parent().parent().find('.good_name').html(good_name);
+                                    });
+                                </script>
+                            </div>
                         </p>
                     </div>
                     <?php if ($k % 6 == 0): ?>
@@ -481,6 +518,12 @@ class Goods extends MX_Controller {
     public function getAttrNameById($id)
     {
         return $this->model->getAttrNameById($id);
+    }
+
+    public function good_data_save()
+    {
+        var_dump($_POST);
+        $this->model->good_data_save();
     }
 
 

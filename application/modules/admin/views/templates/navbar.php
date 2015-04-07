@@ -28,6 +28,11 @@
                 }
                 ?> ><a href="/admin/goods">Товары</a></li>
                 <li <?php
+                if ($this->uri->segment(2) == 'accessors') {
+                    echo "class=\"active\"";
+                }
+                ?> ><a href="/admin/accessors">Аксессуары</a></li>
+                <li <?php
                 if ($this->uri->segment(2) == 'widget') {
                     echo "class=\"active\"";
                 }
@@ -44,12 +49,17 @@
                         if ($this->uri->segment(2) == 'subcategories') {
                             echo "class=\"active\"";
                         }
+                        ?>><a href="/admin/categories_accessors">Категории аксессуаров</a></li>
+                        <li <?php
+                        if ($this->uri->segment(2) == 'subcategories') {
+                            echo "class=\"active\"";
+                        }
                         ?>><a href="/admin/subcategories">Подкатегории товаров</a></li>
                         <li <?php
                         if ($this->uri->segment(2) == 'attributes') {
                             echo "class=\"active\"";
                         }
-                        ?>><a href="/admin/attributes">Атрибуты товаров</a></li>
+                        ?>><a href="/admin/attributes">Атрибуты</a></li>
                         <li <?php
                         if ($this->uri->segment(2) == 'toursbuy') {
                             echo "class=\"active\"";

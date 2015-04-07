@@ -15,12 +15,15 @@ function image_del_click_subscription(module) {
                     $(image_del).parent().parent().remove();
                 }
             });
-            return true
+            return true;
         } else {
             return false;
         }
     });
-    $('.image_view').colorbox({
+
+    
+
+    /*$('.image_view').colorbox({
         rel: 'gal',
         current: "Фото {current} из {total}",
         previous: 'Пред.',
@@ -38,7 +41,7 @@ function image_del_click_subscription(module) {
         width: "800",
         height: "600",
         close: "Закрыть"
-    });
+    });*/
 }
 
 jQuery.br2nl = function (varTest) {
@@ -75,32 +78,14 @@ jQuery(document).ready(function () {
         return false;
     });
 
-    $('.del_ex_tag').click(function () {
-        if (confirm('Удалить?')) {
-            var del_btn = this
-            $.ajax({
-                url: '/admin/tag_del',
-                type: 'POST',
-                data: {
-                    id: $(this).parent().find('input').attr('tag')
-                },
-                error: function () {
-                    console.log('Ошибка удаления тега!')
-                },
-                success: function () {
-                    $(del_btn).parent().remove();
-                }
-            });
-            return false;
-        } else {
-            return false;
-        }
-    });
+
     $('.tags').keydown(function () {
         if (event.keyCode == $.ui.keyCode.ENTER) {
             return false;
         }
-    })
+    });
 
-    image_del_click_subscription()
+    image_del_click_subscription();
+    
+
 });

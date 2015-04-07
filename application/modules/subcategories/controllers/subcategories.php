@@ -24,6 +24,7 @@ class Subcategories extends MX_Controller {
     public function view($for_front = false, $url = false) {
         $data['module_name'] = $this->module_name;
         $data['module'] = $this->module;
+        var_dump("lol");
         if (!$for_front) {
             if ($url) {
                 $data['entries'] = $this->model->get_by_url($url);
@@ -228,6 +229,93 @@ class Subcategories extends MX_Controller {
     {
         $result = $this->module->getByCatId($id);
         return $result['text'];
+    }
+
+    public function images_upload($hotel_id) {
+        if (!$this->session->userdata('logged')) {
+            redirect('admin/login');
+        }
+        if (!($_FILES)) {
+            die("Не выбрано ни одной картинки!");
+        }
+        if ($_FILES['file']['name']) {
+            foreach ($_FILES['file']['name'] as $k => $f) {
+                if (!$_FILES['file']['error'][$k]) {
+                    $blacklist = array(".php", ".phtml", ".php3", ".php4", ".html", ".htm", ".asp", ".aspx");
+                    foreach ($blacklist as $item)
+                        if (preg_match("/$item\$/i", $_FILES['file']['name'][$k]))
+                            die("Недопустимый формат файла");
+                    if (is_uploaded_file($_FILES['file']['tmp_name'][$k])) {
+                        $namef = time() . "_" . md5(uniqid()) . "." . preg_replace("/.*?\./", '', $_FILES['file']['name'][$k]);
+                        ;
+                        $uploadfile = "images/" . $this->module . "/" . $namef;
+                        if (!move_uploaded_file($_FILES['file']['tmp_name'][$k], $uploadfile)) {
+                            die("Error");
+                        } else {
+                            $image = $namef;
+                            $this->model->images_insert($image, $hotel_id);
+                            echo 'Файл "' . $_FILES['file']['name'][$k] . '" успешно загружен';
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public function get_images($id, $front = false) {
+        if ($front) {
+            return $this->model->get_images($id);
+        } else {
+            $pimages = $this->model->get_images($id);
+
+            if (!$pimages) {
+                echo '<div class="alert alert-danger" role="alert">Миниатюр не найдено!</div>';
+            }
+            ?>
+            <div class="row images">
+                <?php
+                foreach ($pimages as $k => $pimage):
+                    $k++;
+                    ?>
+                    <div id="image_<?= $pimage['id'] ?>" style="" class="col-xs-4 col-md-2">
+                        <p class="thumbnail" style="width:100%;height:100%;">
+                            <button id="<?= $pimage['id'] ?>" type="button" class="close image_del">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <a class="image_view" style="width:100%;height:100%;" href="/images/<?= $this->module . '/' . $pimage['image'] ?>">
+                                <img class="img-rounded" style="width:100%;height:100%;" src="/images/<?= $this->module . '/' . $pimage['image'] ?>" alt="...">
+                            </a>
+                        </p>
+                    </div>
+                    <?php if ($k % 6 == 0): ?>
+                        <div class="clear"></div>
+                    <?php endif; ?>
+                    <?php
+                endforeach;
+                ?>
+            </div>
+            <?php
+        }
+    }
+
+    public function image_delete() {
+        if (!$this->session->userdata('logged')) {
+            alert('Авторизуйтесь!');
+            die();
+        }
+        $id = $this->input->post('id');
+        $image = $this->model->get_image($id);
+        if (count($image) > 0) {
+            if (file_exists('images/' . $this->module . '/' . $image['image'])) {
+                $this->model->delete_image($id);
+                unlink('images/' . $this->module . '/' . $image['image']);
+            } else {
+                $this->model->delete_image($id);
+            }
+        } else {
+            die('Такой картинки не существует!');
+        }
     }
 
 }

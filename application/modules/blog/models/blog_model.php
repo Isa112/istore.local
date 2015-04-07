@@ -107,6 +107,7 @@ class Blog_model extends CI_Model {
             'desc' => $this->input->post('desc'),
             'keyw' => $this->input->post('keyw'),
             'text' => $this->input->post('text'),
+            'category_id' => $this->input->post('category'),
             'date' => $date,
             'active' => $this->input->post('active'),
             'image' => $image
@@ -128,6 +129,7 @@ class Blog_model extends CI_Model {
                 'desc' => $this->input->post('desc'),
                 'keyw' => $this->input->post('keyw'),
                 'text' => $this->input->post('text'),
+                'category_id' => $this->input->post('category'),
                 'date' => date('Y-m-d H:i:s', strtotime($this->input->post('date'))),
                 'active' => $this->input->post('active')
             );
@@ -140,6 +142,7 @@ class Blog_model extends CI_Model {
                 'desc' => $this->input->post('desc'),
                 'keyw' => $this->input->post('keyw'),
                 'text' => $this->input->post('text'),
+                'category_id' => $this->input->post('category'),
                 'date' => date('Y-m-d H:i:s', strtotime($this->input->post('date'))),
                 'active' => $this->input->post('active'),
                 'image' => $image
