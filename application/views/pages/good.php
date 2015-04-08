@@ -12,18 +12,7 @@
          <?php endforeach;?>
        </div>
        <div id="panel-sticker" title="Еще товары">
-            <p></p>
-            <p></p>
-            <p>Е</p>
-            <p>щ</p>
-            <p>е</p>
-            <p></p>
-            <p>т</p>
-            <p>о</p>
-            <p>в</p>
-            <p>а</p>
-            <p>р</p>
-            <p>ы</p>
+            <div class="active_panel"></div>
            <div class="close">×</div>
        </div>
    </div>
@@ -35,19 +24,19 @@
       <div class="container">
          <!-- #myCarousel -->
          <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            
+
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                <?php foreach($images as $key=>$image):?>
                   <div class="item <?php if($key==0):?>active<?php endif;?>">
                      <a href="#"><img src="/images/goods/<?=$image['image']?>" alt="" title=""></a>
-                     <h3><a href="#"><?=$image['name']?></a></h3>
+                     <h3><?=$image['name']?></h3>
                   </div><!-- item end -->
                <?php endforeach;?>
-   
+
             </div>
              <!-- Wrapper for slides -->
-   
+
             <!-- carousel-indicators -->
               <ol class="carousel-indicators">
                 <?php foreach($images as $key => $image):?>
@@ -55,7 +44,7 @@
                 <?php endforeach;?>
               </ol>
             <!-- carousel-indicators end -->
-   
+
          </div><!-- #myCarousel end -->
       </div><!-- container end -->
    </div><!-- slider end -->
@@ -83,7 +72,7 @@
                      <p><?=$attr['value']?></p>
                   </div>
                <?php endforeach;?>
-   
+
             </div><!-- col-md-6 end -->
          <?php endif;?>
 

@@ -42,7 +42,7 @@
       <div class="container">
          <!-- row -->
          <div class="row">
-            <?php foreach($entries as $entry):?>
+            <?php foreach($entries as $key=>$entry):?>
                <div class="col-md-<?=12/count($entries)?> col-xs-12 main_pagination_item main_pagination_item_<?=$key+1?>">
                   <div class="main_pagination_wrapper">
 
@@ -55,7 +55,7 @@
 
                   </div>
                </div>
-               <!-- main_pagination_item
+               <!-- main_pagination_item-->
             <?php endforeach;?>
          </div><!-- row end -->
       </div><!-- container end -->
